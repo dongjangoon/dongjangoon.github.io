@@ -1,0 +1,125 @@
+/* Custom CSS for improved layout */
+
+/* Header styling with grid layout */
+.site-header {
+  border-bottom: 1px solid #e1e4e8;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header .wrapper {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 1rem !important;
+  display: grid !important;
+  grid-template-columns: 280px 1fr !important;
+  grid-template-areas: "title nav" !important;
+  align-items: center;
+  height: 60px;
+  gap: 2rem;
+}
+
+.site-title {
+  grid-area: title !important;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #24292e;
+  text-decoration: none;
+}
+
+.site-title:hover {
+  color: #0366d6;
+}
+
+.site-nav {
+  grid-area: nav !important;
+  width: 100%;
+}
+
+.site-nav .trigger {
+  display: flex !important;
+  gap: 2rem !important;
+  justify-content: flex-end !important;
+  width: 100%;
+}
+
+.site-nav .page-link {
+  color: #586069;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.site-nav .page-link:hover {
+  color: #0366d6;
+}
+
+/* Content layout */
+.page-content .wrapper {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+.content-layout {
+  display: grid !important;
+  grid-template-columns: 280px 1fr !important;
+  grid-template-areas: "sidebar main" !important;
+  gap: 2rem !important;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.sidebar {
+  grid-area: sidebar !important;
+  background-color: #f6f8fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 80px;
+}
+
+.main-content {
+  grid-area: main !important;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .content-layout {
+    grid-template-columns: 250px 1fr !important;
+    grid-template-areas: "sidebar main" !important;
+  }
+  
+  .site-header .wrapper {
+    grid-template-columns: 250px 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header .wrapper {
+    display: flex !important;
+    justify-content: space-between !important;
+    grid-template-columns: none !important;
+    grid-template-areas: none !important;
+  }
+  
+  .content-layout {
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "main" "sidebar" !important;
+    gap: 1rem !important;
+    padding: 1rem;
+  }
+  
+  .sidebar {
+    position: static;
+  }
+}

@@ -1,0 +1,211 @@
+---
+layout: default
+title: Categories
+permalink: /categories/
+---
+
+<div class="categories-page">
+  <div class="page-header">
+    <h1>Categories</h1>
+    <p>Explore posts by category</p>
+  </div>
+
+  <div class="categories-grid">
+    {% assign categories = site.categories | sort %}
+    {% for category in categories %}
+      {% assign category_name = category[0] %}
+      {% assign posts = category[1] %}
+      
+      <div class="category-card" id="{{ category_name | slugify }}">
+        <div class="category-header">
+          <h2 class="category-title">{{ category_name | capitalize }}</h2>
+          <span class="post-count">{{ posts.size }} posts</span>
+        </div>
+        
+        <div class="category-posts">
+          {% for post in posts limit: 5 %}
+            <article class="category-post-item">
+              <div class="post-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">
+                  {{ post.date | date: "%b %-d, %Y" }}
+                </time>
+              </div>
+              <h3 class="post-title">
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </h3>
+              {% if post.excerpt %}
+                <div class="post-excerpt">
+                  {{ post.excerpt | truncatewords: 20 }}
+                </div>
+              {% endif %}
+            </article>
+          {% endfor %}
+          
+          {% if posts.size > 5 %}
+            <div class="view-more">
+              <a href="#" onclick="showAllPosts('{{ category_name | slugify }}'); return false;">
+                View all {{ posts.size }} posts →
+              </a>
+              <div class="hidden-posts" id="hidden-{{ category_name | slugify }}">
+                {% for post in posts offset: 5 %}
+                  <article class="category-post-item">
+                    <div class="post-meta">
+                      <time datetime="{{ post.date | date_to_xmlschema }}">
+                        {{ post.date | date: "%b %-d, %Y" }}
+                      </time>
+                    </div>
+                    <h3 class="post-title">
+                      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h3>
+                    {% if post.excerpt %}
+                      <div class="post-excerpt">
+                        {{ post.excerpt | truncatewords: 20 }}
+                      </div>
+                    {% endif %}
+                  </article>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+function showAllPosts(categoryId) {
+  const hiddenPosts = document.getElementById('hidden-' + categoryId);
+  const viewMoreLink = hiddenPosts.previousElementSibling.querySelector('a');
+  
+  if (hiddenPosts.style.display === 'none' || hiddenPosts.style.display === '') {
+    hiddenPosts.style.display = 'block';
+    viewMoreLink.textContent = 'Show less ↑';
+  } else {
+    hiddenPosts.style.display = 'none';
+    viewMoreLink.textContent = viewMoreLink.textContent.replace('Show less ↑', 'View all posts →');
+  }
+}
+</script>
+
+<style>
+.categories-page {
+  max-width: 100%;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+  
+  p {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}
+
+.categories-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.category-card {
+  background-color: var(--surface-color);
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-color);
+  
+  .category-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color);
+  }
+  
+  .post-count {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+}
+
+.category-posts {
+  .category-post-item {
+    margin-bottom: 1.5rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .post-meta {
+    margin-bottom: 0.5rem;
+    
+    time {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+  }
+  
+  .post-title {
+    margin: 0 0 0.5rem 0;
+    
+    a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 1.125rem;
+      font-weight: 600;
+      line-height: 1.3;
+      
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+  
+  .post-excerpt {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+}
+
+.view-more {
+  margin-top: 1.5rem;
+  
+  a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.hidden-posts {
+  display: none;
+  margin-top: 1.5rem;
+}
+</style>
