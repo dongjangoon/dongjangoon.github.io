@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HTTP 프로토콜의 진화: 1.0부터 3.0까지"
-date: 2025-01-07 11:00:00 +0000
+date: 2025-09-07 11:00:00 +0000
 categories: [network, protocols]
 tags: [http, http2, http3, web-protocols, performance, multiplexing, quic]
 excerpt: "HTTP 1.0부터 3.0까지 웹 프로토콜의 진화 과정을 살펴보고, 각 버전의 주요 특징과 개선점을 분석합니다."

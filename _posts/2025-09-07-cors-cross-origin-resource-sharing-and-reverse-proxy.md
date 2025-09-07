@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "CORS(Cross-Origin Resource Sharing)와 리버스 프록시: 웹 보안의 진화"
-date: 2025-01-07 10:00:00 +0000
+date: 2025-09-07 10:00:00 +0000
 categories: [network, web]
 tags: [cors, reverse-proxy, web-security, same-origin-policy, csrf, xss]
 excerpt: "웹 애플리케이션 아키텍처가 MVC에서 CSR로 진화하면서 등장한 CORS 문제와 리버스 프록시를 통한 해결 방안을 살펴봅니다."
