@@ -101,12 +101,12 @@ function showAllPosts(categoryId) {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: var(--text-color);
+    color: #24292e !important; /* 강제 다크 텍스트 */
   }
   
   p {
     font-size: 1.125rem;
-    color: var(--text-secondary);
+    color: #586069 !important; /* 강제 그레이 텍스트 */
     margin: 0;
   }
 }
@@ -117,10 +117,17 @@ function showAllPosts(categoryId) {
 }
 
 .category-card {
-  background-color: var(--surface-color);
+  background-color: #ffffff !important; /* 화이트 배경 */
+  border: 1px solid #e1e4e8 !important; /* 연한 보더 */
   border-radius: 8px;
   padding: 2rem;
-  box-shadow: var(--shadow);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24) !important;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
 }
 
 .category-header {
@@ -129,18 +136,18 @@ function showAllPosts(categoryId) {
   align-items: center;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 2px solid #0366d6 !important; /* 블루 보더 */
   
   .category-title {
     font-size: 1.5rem;
     font-weight: 600;
     margin: 0;
-    color: var(--text-color);
+    color: #24292e !important; /* 강제 다크 텍스트 */
   }
   
   .post-count {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: #0366d6 !important; /* 블루 배경 */
+    color: #ffffff !important; /* 화이트 텍스트 */
     padding: 0.25rem 0.75rem;
     border-radius: 16px;
     font-size: 0.875rem;
@@ -151,6 +158,16 @@ function showAllPosts(categoryId) {
 .category-posts {
   .category-post-item {
     margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f6f8fa !important; /* 연한 그레이 배경 */
+    border-radius: 6px;
+    border: 1px solid #e1e4e8 !important; /* 연한 보더 */
+    transition: background-color 0.2s;
+    
+    &:hover {
+      background-color: #ffffff !important; /* 호버시 화이트 */
+      border-color: #d1d5da !important;
+    }
     
     &:last-child {
       margin-bottom: 0;
@@ -161,7 +178,7 @@ function showAllPosts(categoryId) {
     margin-bottom: 0.5rem;
     
     time {
-      color: var(--text-secondary);
+      color: #586069 !important; /* 강제 그레이 텍스트 */
       font-size: 0.875rem;
       font-weight: 500;
     }
@@ -171,20 +188,20 @@ function showAllPosts(categoryId) {
     margin: 0 0 0.5rem 0;
     
     a {
-      color: var(--text-color);
+      color: #24292e !important; /* 강제 다크 텍스트 */
       text-decoration: none;
       font-size: 1.125rem;
       font-weight: 600;
       line-height: 1.3;
       
       &:hover {
-        color: var(--primary-color);
+        color: #0366d6 !important; /* 호버시 블루 */
       }
     }
   }
   
   .post-excerpt {
-    color: var(--text-secondary);
+    color: #586069 !important; /* 강제 그레이 텍스트 */
     line-height: 1.6;
     font-size: 0.9rem;
   }
@@ -192,9 +209,11 @@ function showAllPosts(categoryId) {
 
 .view-more {
   margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e1e4e8 !important; /* 연한 보더 */
   
   a {
-    color: var(--primary-color);
+    color: #0366d6 !important; /* 강제 블루 텍스트 */
     text-decoration: none;
     font-weight: 500;
     
