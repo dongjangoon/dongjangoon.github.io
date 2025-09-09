@@ -1,14 +1,12 @@
 ---
-categories: tech
-date: 2025-06-07 08:57:00 +0000
-excerpt: '- templates/k8s-mcp-server-rbac.yaml: ServiceAccount 정의에 automountServiceAccountToken:
-  true를 추가하여 Kubernetes 1.24+ 환경에서 서비스 어카운트 토큰이 파드에 자동으로 마운트되도록...'
 layout: post
+title: "Pod 내부에서 인클러스터 kubeConfig ServiceAccount로 참조하기"
+date: 2025-06-07 08:57:00 +0000
+categories: [tech]
+tags: [tech]
+excerpt: "templates/k8s-mcp-server-rbac.yaml: ServiceAccount 정의에 automountServiceAccountToken: true를 추가하여 Kubernetes 1.24+ 환경에서 서비스 어카운트 토큰이 파드에 자동으로 마운트되도록"
 notion_id: 20beef64-a1ca-8065-8492-ebd9676acee8
 notion_url: https://www.notion.so/Pod-kubeConfig-ServiceAccount-20beef64a1ca80658492ebd9676acee8
-tags:
-- tech
-title: Pod 내부에서 인클러스터 kubeConfig ServiceAccount로 참조하기
 ---
 
 - `**templates/k8s-mcp-server-rbac.yaml**`: `ServiceAccount` 정의에 `automountServiceAccountToken: true`를 추가하여 Kubernetes 1.24+ 환경에서 서비스 어카운트 토큰이 파드에 자동으로 마운트되도록 합니다.
@@ -19,5 +17,3 @@ title: Pod 내부에서 인클러스터 kubeConfig ServiceAccount로 참조하�
 - `**main.py**`: `KubernetesMCPServer` 인스턴스화 시 `kubeconfig_path=None`을 명시적으로 전달하도록 수정하여 인클러스터 설정을 우선하도록 합니다.
 
 ---
-
-*Originally published in [Notion](https://www.notion.so/Pod-kubeConfig-ServiceAccount-20beef64a1ca80658492ebd9676acee8) on June 07, 2025*

@@ -1,15 +1,12 @@
 ---
-categories: monitoring
-date: 2025-06-11 11:44:00 +0000
-excerpt: ┌─────────────────────────────────────────────────────────────────────┐
 layout: post
+title: "Prometheus 이중화 + Thanos 설치"
+date: 2025-06-11 11:44:00 +0000
+categories: [monitoring]
+tags: [tech, monitoring, observability]
+excerpt: "Thanos와 Prometheus를 활용한 고가용성 모니터링 시스템 구축 및 이중화 설정 방법"
 notion_id: 20feef64-a1ca-8002-846e-ebdee3cf8b4b
 notion_url: https://www.notion.so/Prometheus-Thanos-20feef64a1ca8002846eebdee3cf8b4b
-tags:
-- tech
-- monitoring
-- observability
-title: Prometheus 이중화 + Thanos 설치
 ---
 
 # 1. 아키텍처

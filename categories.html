@@ -43,7 +43,7 @@ permalink: /categories/
           
           {% if posts.size > 5 %}
             <div class="view-more">
-              <a href="#" onclick="showAllPosts('{{ category_name | slugify }}'); return false;">
+              <a href="javascript:void(0)" onclick="showAllPosts('{{ category_name | slugify }}')">
                 View all {{ posts.size }} posts →
               </a>
               <div class="hidden-posts" id="hidden-{{ category_name | slugify }}">
@@ -76,14 +76,21 @@ permalink: /categories/
 <script>
 function showAllPosts(categoryId) {
   const hiddenPosts = document.getElementById('hidden-' + categoryId);
-  const viewMoreLink = hiddenPosts.previousElementSibling.querySelector('a');
+  const viewMoreDiv = hiddenPosts.parentElement;
+  const viewMoreLink = viewMoreDiv.querySelector('a');
+  const originalText = viewMoreLink.getAttribute('data-original-text') || viewMoreLink.textContent;
+  
+  // 처음 클릭시 원본 텍스트 저장
+  if (!viewMoreLink.getAttribute('data-original-text')) {
+    viewMoreLink.setAttribute('data-original-text', originalText);
+  }
   
   if (hiddenPosts.style.display === 'none' || hiddenPosts.style.display === '') {
     hiddenPosts.style.display = 'block';
     viewMoreLink.textContent = 'Show less ↑';
   } else {
     hiddenPosts.style.display = 'none';
-    viewMoreLink.textContent = viewMoreLink.textContent.replace('Show less ↑', 'View all posts →');
+    viewMoreLink.textContent = originalText;
   }
 }
 </script>

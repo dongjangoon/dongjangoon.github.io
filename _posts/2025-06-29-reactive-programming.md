@@ -1,15 +1,15 @@
 ---
-categories: tech
-date: 2025-06-29 11:28:00 +0000
-excerpt: 리액티브 프로그래밍은 현대 소프트웨어 개발에서 매우 중요한 패러다임 중 하나입니다. "데이터 스트림"과 "변경 전파"에 초점을 맞춘
-  선언적(Declarative) 프로그래밍 패러다임입니다.
 layout: post
+title: "Reactive Programming"
+date: 2025-06-29 11:28:00 +0000
+categories: [programming]
+tags: [reactive, programming, async, streams, tech]
+excerpt: "리액티브 프로그래밍은 데이터 스트림과 변경 전파에 초점을 맞춘 선언적 프로그래밍 패러다임입니다."
 notion_id: 221eef64-a1ca-8088-9f2b-e8a4c6d10e98
 notion_url: https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c6d10e98
-tags:
-- tech
-title: Reactive Programming
 ---
+
+# Reactive Programming
 
 리액티브 프로그래밍은 현대 소프트웨어 개발에서 매우 중요한 패러다임 중 하나입니다. "데이터 스트림"과 "변경 전파"에 초점을 맞춘 **선언적(Declarative) 프로그래밍 패러다임**입니다.
 

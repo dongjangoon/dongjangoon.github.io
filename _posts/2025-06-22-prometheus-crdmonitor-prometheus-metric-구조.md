@@ -1,16 +1,12 @@
 ---
-categories: monitoring
-date: 2025-06-22 06:03:00 +0000
-excerpt: ServiceMonitor는 Kubernetes Service를 통해 메트릭을 수집합니다. Prometheus Operator가 ServiceMonitor
-  리소스를 감시하다가 새로운 ServiceMonitor가 생성되면, 해당 ServiceMonitor의...
 layout: post
+title: "Prometheus CRD(Monitor, Prometheus), Metric 구조"
+date: 2025-06-22 06:03:00 +0000
+categories: [monitoring]
+tags: [tech, monitoring, observability]
+excerpt: "ServiceMonitor는 Kubernetes Service를 통해 메트릭을 수집합니다. Prometheus Operator가 ServiceMonitor 리소스를 감시하다가 새로운 ServiceMonitor가 생성되면, 해당 ServiceMonitor의 selector와 매칭되는 Service를 찾습니다."
 notion_id: 21aeef64-a1ca-8083-b3e9-fcd646b7da50
 notion_url: https://www.notion.so/Prometheus-CRD-Monitor-Prometheus-Metric-21aeef64a1ca8083b3e9fcd646b7da50
-tags:
-- tech
-- monitoring
-- observability
-title: Prometheus CRD(Monitor, Prometheus), Metric 구조
 ---
 
 ## 동작 원리

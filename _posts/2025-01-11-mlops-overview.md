@@ -1,15 +1,12 @@
 ---
-categories: ai
-date: 2025-01-11 14:14:00 +0000
-excerpt: '- 연구원이 작성한 학습 코드를 통해 프로덕션 환경에 배포하고, 적절한 Trigger에 따라 프로덕션에서 학습을 진행'
 layout: post
+title: "MLOps Overview"
+date: 2025-01-11 14:14:00 +0000
+categories: [ai]
+tags: [tech, ai, machine-learning]
+excerpt: "연구원이 작성한 학습 코드를 통해 프로덕션 환경에 배포하고, 적절한 Trigger에 따라 프로덕션에서 학습을 진행"
 notion_id: 178eef64-a1ca-80eb-96d6-e14d691b64db
 notion_url: https://www.notion.so/MLOps-Overview-178eef64a1ca80eb96d6e14d691b64db
-tags:
-- tech
-- ai
-- machine-learning
-title: MLOps Overview
 ---
 
 # MLOps란?

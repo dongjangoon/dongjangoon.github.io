@@ -1,16 +1,12 @@
 ---
-categories: kubernetes
-date: 2025-07-01 13:36:00 +0000
-excerpt: Kubernetes는 컨테이너화된 워크로드를 관리하고 오케스트레이션하는 강력한 플랫폼입니다. 하지만 Kubernetes 자체는 모든
-  종류의 애플리케이션을 위한 복잡한 운영 로직을 내장하고 있지는 않습니다. 이때 Kubernetes Operator 패턴과 Custom...
 layout: post
+title: "Kubernetes Operator 패턴과 CRD(Custom Resource Definition)"
+date: 2025-07-01 13:36:00 +0000
+categories: [kubernetes]
+tags: [tech, kubernetes, k8s]
+excerpt: "Kubernetes는 컨테이너화된 워크로드를 관리하고 오케스트레이션하는 강력한 플랫폼입니다. 하지만 Kubernetes 자체는 모든 종류의 애플리케이션을 위한 복잡한 운영 로직을 내장하고 있지는 않습니다. 이때 Kubernetes Operator 패턴과 Custom Resource Definition (CRD)이 등장합니다."
 notion_id: 223eef64-a1ca-809e-b68c-c87140c793c7
 notion_url: https://www.notion.so/Kubernetes-Operator-CRD-Custom-Resource-Definition-223eef64a1ca809eb68cc87140c793c7
-tags:
-- tech
-- kubernetes
-- k8s
-title: Kubernetes Operator 패턴과 CRD(Custom Resource Definition)
 ---
 
 Kubernetes는 컨테이너화된 워크로드를 관리하고 오케스트레이션하는 강력한 플랫폼입니다. 하지만 Kubernetes 자체는 모든 종류의 애플리케이션을 위한 복잡한 운영 로직을 내장하고 있지는 않습니다. 이때 **Kubernetes Operator 패턴**과 **Custom Resource Definition (CRD)**이 등장하여 Kubernetes의 기능을 확장하고 특정 애플리케이션의 운영을 자동화할 수 있도록 돕습니다.

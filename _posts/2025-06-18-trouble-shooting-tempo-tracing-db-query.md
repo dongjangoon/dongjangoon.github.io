@@ -1,14 +1,12 @@
 ---
-categories: tech
-date: 2025-06-18 12:53:00 +0000
-excerpt: '- hikariCP에서 커넥션을 유지하는 쿼리가 요청이 다 처리된 후에도 30분 주기로 발생함. → 최종적으로 특정 요청이 굉장히
-  길게 걸린 것처럼 트레이스가 표시됨 (19h, 1h)'
 layout: post
+title: "Trouble Shooting: Tempo Tracing DB Query"
+date: 2025-06-18 12:53:00 +0000
+categories: [tech]
+tags: [tech]
+excerpt: "hikariCP에서 커넥션을 유지하는 쿼리가 요청이 다 처리된 후에도 30분 주기로 발생함. 최종적으로 특정 요청이 굉장히 길게 걸린 것처럼 트레이스가 표시됨 (19h, 1h)"
 notion_id: 216eef64-a1ca-8093-bcc5-e2b4ae0db10b
 notion_url: https://www.notion.so/Trouble-Shooting-Tempo-Tracing-DB-Query-216eef64a1ca8093bcc5e2b4ae0db10b
-tags:
-- tech
-title: 'Trouble Shooting: Tempo Tracing DB Query'
 ---
 
 ## 문제

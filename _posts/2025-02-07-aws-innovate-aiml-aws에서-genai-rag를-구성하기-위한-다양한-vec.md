@@ -1,16 +1,12 @@
 ---
-categories: ai
-date: 2025-02-07 07:32:00 +0000
-excerpt: 대화, 스토리, 이미지, 동영상, 음악 등 새로운 콘텐츠와 아이디어를 생성하는, 대규모 데이터를 기반으로 사전 학습된 초거대 모델로,
-  일반적으로 파운데이션 모델 (FM)이라고 합니다.
 layout: post
+title: "AWS Innovate AI/ML (AWS에서 GenAI RAG를 구성하기 위한 다양한 Vector database에 대해 알아보기)"
+date: 2025-02-07 07:32:00 +0000
+categories: [ai]
+tags: [tech, ai, machine-learning]
+excerpt: "대화, 스토리, 이미지, 동영상, 음악 등 새로운 콘텐츠와 아이디어를 생성하는, 대규모 데이터를 기반으로 사전 학습된 초거대 모델로, 일반적으로 파운데이션 모델 (FM)이라고 합니다."
 notion_id: 193eef64-a1ca-808e-8463-c903e16d1348
 notion_url: https://www.notion.so/AWS-Innovate-AI-ML-AWS-GenAI-RAG-Vector-database-193eef64a1ca808e8463c903e16d1348
-tags:
-- tech
-- ai
-- machine-learning
-title: AWS Innovate AI/ML (AWS에서 GenAI RAG를 구성하기 위한 다양한 Vector database에 대해 알아보기)
 ---
 
 # 생성형 AI (GenAI)란?
