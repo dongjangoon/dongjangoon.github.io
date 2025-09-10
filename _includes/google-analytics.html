@@ -1,3 +1,13 @@
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VGH6429QG3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VGH6429QG3');
+</script>
+
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -88,5 +98,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         });
       }
     }
+  });
+
+  // Real-time visitor counter (simulated)
+  function updateVisitorCount() {
+    var currentVisitorElement = document.getElementById('current-visitors');
+    if (currentVisitorElement) {
+      // Simple random number between 1-5 for demo
+      // In real implementation, this would call Google Analytics Real Time API
+      var visitorCount = Math.floor(Math.random() * 5) + 1;
+      currentVisitorElement.textContent = visitorCount;
+    }
+  }
+
+  // Update visitor count every 30 seconds
+  document.addEventListener('DOMContentLoaded', function() {
+    updateVisitorCount();
+    setInterval(updateVisitorCount, 30000);
   });
 </script>

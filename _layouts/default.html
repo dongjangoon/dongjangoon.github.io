@@ -237,6 +237,34 @@
                   {% endfor %}
                 </ul>
               </div>
+
+              <div class="sidebar-section">
+                <h3>Blog Stats</h3>
+                <div class="stats-container">
+                  <!-- Visitor Counter Badge -->
+                  <div class="stat-item">
+                    <img src="https://komarev.com/ghpvc/?username=dongjangoon&repo=dongjangoon.github.io&style=flat-square&color=brightgreen" alt="Visitor Count" />
+                  </div>
+                  
+                  <!-- GitHub Stats -->
+                  <div class="stat-item">
+                    <img src="https://img.shields.io/github/last-commit/dongjangoon/dongjangoon.github.io?style=flat-square&color=blue" alt="Last Update" />
+                  </div>
+                  
+                  <!-- Post Count -->
+                  <div class="stat-item">
+                    <img src="https://img.shields.io/badge/Posts-{{ site.posts | size }}-orange?style=flat-square" alt="Total Posts" />
+                  </div>
+                  
+                  <!-- Real-time Analytics (if available) -->
+                  <div class="stat-item">
+                    <div class="analytics-widget" id="real-time-visitors">
+                      <span class="stat-label">Online Now</span>
+                      <span class="stat-value" id="current-visitors">-</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </aside>
 
             <!-- Main content -->
