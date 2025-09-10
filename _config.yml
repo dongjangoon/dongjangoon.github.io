@@ -28,6 +28,9 @@ url: "https://dongjangoon.github.io" # the base hostname & protocol for your sit
 twitter_username: your_twitter
 github_username: dongjangoon
 
+# Google Analytics
+google_analytics: GTM-T68FQGLP
+
 # Build settings
 theme: minima
 plugins:
@@ -58,6 +61,11 @@ highlighter: rouge
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+  parse_block_html: true
+  parse_span_html: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
