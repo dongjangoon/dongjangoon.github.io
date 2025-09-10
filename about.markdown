@@ -34,10 +34,10 @@ DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표
 - Redis Instance 3개를 엮어 쿼럼을 갖춘 Sentinel 구성을 통해 HA 보장
 
 #### XX은행 Gen AI 플랫폼 구축 프로젝트 (2025.02 -)
-- 농협 사내 문서 및 데이터를 기반으로 한 전사적 업무 자동화 및 업무 도움 AI 플랫폼 구축 프로젝트
+- 사내 문서 및 데이터를 기반으로 한 전사적 업무 자동화 및 업무 도움 AI 플랫폼 구축 프로젝트
 - 온프레미스 K8s 기반 환경에서 Frontend, Backend, 자사 AI 서비스 플랫폼 및 여러 솔루션의 CI/CD 환경 구성 (Gitlab CI/CD)
 - Grafana, Prometheus, Loki, Promtail, Opentelemetry Agent, Collector와 Tempo로 표준 모니터링 및 알림 체계 구축
-- vllm, dcgm-exporter 등으로 LLM 모니터링 → KV Cache, token output, process hang 여부 등을 통해 기존 TP1이던 GPU 구성을 TP2 구성으로 최적화
+- vllm, dcgm-exporter 등으로 LLM 모니터링 → KV Cache, token output, process hang 여부 등을 모니터링하고 이를  통해 기존 TP1이던 GPU 구성을 TP2 구성으로 최적화 및 vllm context-length, batch size 등 파라미터 조절로 성능 최적화 경험
 
 ---
 
