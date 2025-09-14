@@ -120,8 +120,6 @@ compress_html:
 
 # Search
 search_provider: lunr
-search:
-  provider: lunr
 
 
 # Defaults

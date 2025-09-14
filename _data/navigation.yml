@@ -8,6 +8,8 @@ main:
     url: /archive/
   - title: "About"
     url: /about/
+  - title: '<i class="fas fa-search"></i>'
+    url: /search/
 
 # sidebar navigation for posts
 docs:
