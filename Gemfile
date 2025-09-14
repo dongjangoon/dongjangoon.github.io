@@ -3,9 +3,6 @@ source "https://rubygems.org"
 # Use GitHub Pages for compatibility
 gem "github-pages", group: :jekyll_plugins
 
-# Theme - you can change this later
-gem "minima", "~> 2.5"
-
 # Plugins for enhanced functionality
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
@@ -14,6 +11,7 @@ group :jekyll_plugins do
   gem "jekyll-paginate"
   gem "jekyll-gist"
   gem "jekyll-github-metadata"
+  gem "jekyll-include-cache"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem

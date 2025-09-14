@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Nginx와 epoll: 고성능 웹서버의 핵심 기술"
 date: 2025-09-07 12:00:00 +0000
-categories: [Linux]
+categories: development
 tags: [nginx, epoll, non-blocking-io, event-driven, web-server, performance]
 excerpt: "Nginx가 어떻게 epoll을 활용해 높은 성능과 확장성을 달성하는지, 이벤트 기반 비동기 아키텍처의 핵심 원리를 살펴봅니다."
 ---

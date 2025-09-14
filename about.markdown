@@ -1,10 +1,15 @@
 ---
-layout: page
-title: About
+layout: single
+title: "About"
 permalink: /about/
+author_profile: true
+sidebar:
+  nav: "main"
+toc: true
+toc_sticky: true
 ---
 
-# 👋 안녕하세요!
+# 안녕하세요!
 
 DevOps와 SRE 개발자 김동현입니다. 좋은 아키텍처와 좋은 커뮤니케이션이란 무엇일까에 대해 고민하고 있습니다.
 
@@ -12,7 +17,7 @@ DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표
 
 ---
 
-## 📞 Contact
+## Contact
 
 - **Email**: [easygoinglife2@gmail.com](mailto:easygoinglife2@gmail.com)
 - **Blog**: [https://dongjangoon.github.io/](https://dongjangoon.github.io/)
@@ -20,7 +25,7 @@ DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표
 
 ---
 
-## 💼 Career
+## Career
 
 ### LG CNS - AI아키텍처 팀
 **Application Architect** | *2025.01 - Present*
@@ -41,7 +46,7 @@ DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표
 
 ---
 
-## 🚀 Tech Stack
+## Tech Stack
 
 **DevOps & Infrastructure**
 - Kubernetes (AWS, NHN Cloud, On-premise), Helm, Docker
@@ -57,21 +62,21 @@ DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표
 
 ---
 
-## 🏆 Certifications
+## Certifications
 
 - **Certified Kubernetes Administrator (CKA)** (2024.11.08)
 
 ---
 
-## 🌐 Languages
+## Languages
 
-- **Korean 🇰🇷**: Native
-- **English 🇺🇸**: TOEIC SPEAKING Advanced Low  
-- **Japanese 🇯🇵**: JLPT N3
+- **Korean**: Native
+- **English**: TOEIC SPEAKING Advanced Low  
+- **Japanese**: JLPT N3
 
 ---
 
-## 🎓 Education
+## Education
 
 **Seoul National University** | *Graduated February 2025*
 
@@ -80,7 +85,7 @@ DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표
 
 ---
 
-## 🔍 Areas of Interest
+## Areas of Interest
 
 현재 **SRE, DevOps, LLMOps, AIOps** 분야에 특별한 관심을 갖고 있으며, 다음과 같은 영역에서 전문성을 키워나가고 있습니다:
 

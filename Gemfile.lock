@@ -289,10 +289,10 @@ DEPENDENCIES
   jekyll-feed (~> 0.12)
   jekyll-gist
   jekyll-github-metadata
+  jekyll-include-cache
   jekyll-paginate
   jekyll-seo-tag
   jekyll-sitemap
-  minima (~> 2.5)
   tzinfo (>= 1, < 3)
   tzinfo-data
   wdm (~> 0.1.1)

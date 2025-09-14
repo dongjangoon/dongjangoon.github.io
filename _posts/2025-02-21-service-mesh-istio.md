@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Service Mesh (Istio)"
 date: 2025-02-21 13:15:00 +0000
-categories: [tech]
+categories: kubernetes
 tags: [tech, istio, service-mesh]
 excerpt: "컨테이너 애플리케이션의 배포, 확장, 관리를 자동화하는 Orchestration System"
 notion_id: 1a1eef64-a1ca-80d5-a5aa-f50d5e3e58ec

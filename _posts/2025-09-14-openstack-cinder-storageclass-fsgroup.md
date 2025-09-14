@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "OpenStack Cinder Storageclass fsGroup Troubleshooting"
 date: 2025-09-14 09:51:00 +0900
-categories: [Kubernetes]
+categories: infrastructure
 tags: [openstack, storageclass, k8s, troubleshooting]
 excerpt: "Storageclass로 OpenStack Cinder CSI Driver로 사용하며 겪은 트러블슈팅을 공유합니다."
 ---

@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Kubernetes 멀티 클러스터 Ingress 아키텍처 설계"
 date: 2025-09-10 00:30:00 +0000
-categories: [kubernetes, networking]
+categories: kubernetes
 tags: [kubernetes, ingress, multi-cluster, istio, nginx, cert-manager, tls]
 excerpt: "대규모 서비스를 위한 멀티 클러스터 Ingress 아키텍처 설계와 Istio, cert-manager를 활용한 고가용성 트래픽 관리 전략을 실무 경험을 바탕으로 다룹니다."
 ---

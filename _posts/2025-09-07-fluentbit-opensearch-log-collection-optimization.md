@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "FluentBit과 OpenSearch를 활용한 로그 수집 및 최적화: ISM을 통한 라이프사이클 관리"
 date: 2025-09-07 15:00:00 +0000
-categories: [kubernetes, monitoring]
+categories: monitoring
 tags: [fluentbit, opensearch, logging, ism, kubernetes]
 excerpt: "FluentBit과 OpenSearch를 결합한 로깅 아키텍처에서 Index State Management(ISM)를 활용한 효율적인 인덱스 라이프사이클 관리와 법적 요구사항을 고려한 로그 보관 정책을 다룹니다."
 ---

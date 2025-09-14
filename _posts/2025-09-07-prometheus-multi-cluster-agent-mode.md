@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Prometheus 멀티 클러스터 모니터링: Agent 모드와 Remote Write를 활용한 중앙 집중식 메트릭 수집"
 date: 2025-09-07 10:00:00 +0000
-categories: [kubernetes, monitoring]
+categories: monitoring
 tags: [prometheus, multi-cluster, agent-mode, remote-write, observability]
 excerpt: "Prometheus Agent 모드와 Remote Write 기능을 활용하여 멀티 클러스터 환경에서 중앙 집중식 메트릭 수집 아키텍처를 구현한 경험을 공유합니다."
 ---

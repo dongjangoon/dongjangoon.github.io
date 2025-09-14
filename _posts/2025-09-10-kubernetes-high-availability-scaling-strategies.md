@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Kubernetes 고가용성과 안정성 확보: HPA, PDB, 스케일링 전략"
 date: 2025-09-10 00:00:00 +0000
-categories: [kubernetes, infrastructure]
+categories: kubernetes
 tags: [kubernetes, hpa, pdb, scaling, high-availability, cluster-autoscaler]
 excerpt: "프로덕션 Kubernetes 환경에서 HPA, PDB, Cluster Autoscaler를 활용한 고가용성과 안정적인 스케일링 전략을 실무 경험을 바탕으로 상세히 다룹니다."
 ---

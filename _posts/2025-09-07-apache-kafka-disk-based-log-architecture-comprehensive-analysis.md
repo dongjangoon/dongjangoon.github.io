@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Apache Kafka 아키텍처 분석: 디스크 기반 로그 구조와 메시지 브로커의 설계 철학"
 date: 2025-09-07 14:00:00 +0000
-categories: [streaming, messaging]
+categories: monitoring
 tags: [kafka, message-broker, distributed-systems, log-architecture, rabbitmq, event-streaming, high-throughput]
 excerpt: "Kafka의 디스크 기반 로그 구조가 어떻게 고처리량을 달성하는지 분석하고, RabbitMQ와의 라우팅 및 복제 아키텍처를 비교합니다."
 ---

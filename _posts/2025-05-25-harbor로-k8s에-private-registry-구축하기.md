@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Harbor로 k8s에 Private Registry 구축하기"
 date: 2025-05-25 08:48:00 +0000
-categories: [kubernetes]
+categories: kubernetes
 tags: [tech, kubernetes, k8s]
 excerpt: "Harbor는 메타데이터를 PostgreSQL DB에, 실제 이미지 레이어를 파일시스템(Registry storage)에 저장"
 notion_id: 1feeef64-a1ca-801b-984a-d8980bdd7a2f

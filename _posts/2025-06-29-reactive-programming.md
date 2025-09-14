@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Reactive Programming"
 date: 2025-06-29 11:28:00 +0000
-categories: [programming]
+categories: development
 tags: [reactive, programming, async, streams, tech]
 excerpt: "리액티브 프로그래밍은 데이터 스트림과 변경 전파에 초점을 맞춘 선언적 프로그래밍 패러다임입니다."
 notion_id: 221eef64-a1ca-8088-9f2b-e8a4c6d10e98

@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Loki 배포 모드 선택 가이드: Simple Scalable 모드와 트러블슈팅 전략"
 date: 2025-09-10 14:00:00 +0000
-categories: [monitoring, logging]
+categories: monitoring
 tags: [loki, grafana, observability, kubernetes, logging-architecture]
 excerpt: "Loki의 다양한 배포 모드를 비교하고, Simple Scalable 모드로의 전환과 Multi-tenancy 관련 트러블슈팅 방법을 다룹니다."
 ---

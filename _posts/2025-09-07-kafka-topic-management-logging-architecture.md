@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Kafka를 활용한 로그 수집 아키텍처: 토픽 설계부터 운영 최적화까지"
 date: 2025-09-07 16:00:00 +0000
-categories: [kubernetes, streaming]
+categories: monitoring
 tags: [kafka, logging, architecture, topic-management, kubernetes]
 excerpt: "Kubernetes 환경에서 Kafka를 활용한 대용량 로그 수집 시스템의 토픽 설계 전략과 운영 최적화 방안을 실무 경험을 바탕으로 공유합니다."
 ---
@@ -328,7 +328,7 @@ groups:
       severity: warning
     annotations:
       summary: "Kafka consumer lag is high"
-      description: "Consumer group fluentbit-consumers has lag {{ $value }}"
+      description: "Consumer group fluentbit-consumers has lag {% raw %}{{ $value }}{% endraw %}"
 
   - alert: KafkaTopicPartitionOffline
     expr: kafka_topic_partition_leader == -1

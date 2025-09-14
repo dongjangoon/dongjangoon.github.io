@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Complete Guide to Kubernetes Monitoring: Tracing, Logging, and Metrics"
 date: 2025-04-08 09:47:00 +0000
-categories: [kubernetes, monitoring, observability]
+categories: monitoring
 tags: [kubernetes, monitoring, prometheus, grafana, loki, tempo, opentelemetry, observability]
 excerpt: "A comprehensive guide to monitoring Kubernetes clusters with the three pillars of observability: metrics, logs, and traces using Prometheus, Grafana, Loki, and OpenTelemetry."
 notion_id: 1cfeef64-a1ca-80ef-955c-e037e530e2c5

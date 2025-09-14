@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Pod 내부에서 인클러스터 kubeConfig ServiceAccount로 참조하기"
 date: 2025-06-07 08:57:00 +0000
-categories: [tech]
+categories: kubernetes
 tags: [tech]
 excerpt: "templates/k8s-mcp-server-rbac.yaml: ServiceAccount 정의에 automountServiceAccountToken: true를 추가하여 Kubernetes 1.24+ 환경에서 서비스 어카운트 토큰이 파드에 자동으로 마운트되도록"
 notion_id: 20beef64-a1ca-8065-8492-ebd9676acee8

@@ -1,0 +1,23 @@
+# main links
+main:
+  - title: "Home"
+    url: /
+  - title: "Categories"
+    url: /categories/
+  - title: "Archive"
+    url: /archive/
+  - title: "About"
+    url: /about/
+
+# sidebar navigation for posts
+docs:
+  - title: "Categories"
+    children:
+      - title: "Kubernetes"
+        url: /categories/#kubernetes
+      - title: "Observability"
+        url: /categories/#observability
+      - title: "AI/ML"
+        url: /categories/#ai
+      - title: "Troubleshooting"
+        url: /categories/#troubleshooting

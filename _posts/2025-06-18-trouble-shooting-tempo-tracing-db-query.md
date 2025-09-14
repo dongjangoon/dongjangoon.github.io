@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Trouble Shooting: Tempo Tracing DB Query"
 date: 2025-06-18 12:53:00 +0000
-categories: [tech]
+categories: monitoring
 tags: [tech]
 excerpt: "hikariCP에서 커넥션을 유지하는 쿼리가 요청이 다 처리된 후에도 30분 주기로 발생함. 최종적으로 특정 요청이 굉장히 길게 걸린 것처럼 트레이스가 표시됨 (19h, 1h)"
 notion_id: 216eef64-a1ca-8093-bcc5-e2b4ae0db10b

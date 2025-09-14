@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "k3d 클러스터와 Ingress-Nginx로 로컬 개발 환경 구축하기 [Claude Code 오픈소스 기여 도전기 #2]"
 date: 2025-09-14 13:45:00 +0900
-categories: [Kubernetes, Development]
+categories: monitoring
 tags: [k3d, ingress-nginx, kubernetes, claude-code, agent-os, alloy-kafka]
 excerpt: "WSL2 환경에서 k3d 클러스터 생성과 ingress-nginx 설치를 통한 로컬 Kubernetes 개발 환경 구축 과정을 상세히 다룹니다."
 ---

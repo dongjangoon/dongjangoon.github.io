@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Building a Comprehensive Kubernetes Monitoring Stack"
 date: 2024-08-23 10:00:00 +0900
-categories: kubernetes monitoring observability
+categories: monitoring
 tags: [prometheus, grafana, loki, opentelemetry, k8s]
 excerpt: "A deep dive into setting up a complete observability stack for Kubernetes with Prometheus, Grafana, Loki, and OpenTelemetry."
 ---

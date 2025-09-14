@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Loki Ring Health 문제 해결: 스케일링 실패에서 단일 바이너리 모드로의 전환 [Claude Code 오픈소스 기여 도전기 #4]"
 date: 2025-09-14 16:00:00 +0900
-categories: [Kubernetes, Observability, Troubleshooting]
+categories: monitoring
 tags: [loki, kubernetes, helm, observability, troubleshooting, grafana]
 excerpt: "Loki의 'too many unhealthy rings' 에러를 해결하기 위해 분산 모드에서 단일 바이너리 모드로 전환하는 실제 문제 해결 과정을 다룹니다."
 ---

@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "완전한 관측성 스택 구축: Prometheus, Grafana, Loki, Alloy 통합 [Claude Code 오픈소스 기여 도전기 #3]"
 date: 2025-09-14 14:00:00 +0900
-categories: [Kubernetes, Observability]
+categories: monitoring
 tags: [prometheus, grafana, loki, alloy, kafka, monitoring, observability]
 excerpt: "k3d 클러스터에 완전한 관측성 스택을 배포하고 Alloy-Kafka 통합을 통한 엔드투엔드 로그 파이프라인을 구축하는 과정을 다룹니다."
 ---
