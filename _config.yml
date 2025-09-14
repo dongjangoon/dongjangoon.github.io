@@ -94,6 +94,7 @@ plugins:
   - jekyll-include-cache
   - jekyll-seo-tag
   - jekyll-github-metadata
+  - jekyll-algolia
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -116,6 +117,12 @@ compress_html:
   clippings: all
   ignore:
     envs: development
+
+# Search
+search_provider: lunr
+search:
+  provider: lunr
+
 
 # Defaults
 defaults:
