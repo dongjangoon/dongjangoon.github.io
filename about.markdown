@@ -9,21 +9,15 @@ toc: true
 toc_sticky: true
 ---
 
-# 안녕하세요!
-
 DevOps와 SRE 개발자 김동현입니다. 좋은 아키텍처와 좋은 커뮤니케이션이란 무엇일까에 대해 고민하고 있습니다.
 
 DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표준화를 통해 문제 해결에 접근하는 것에 관심이 많습니다.
-
----
 
 ## Contact
 
 - **Email**: [easygoinglife2@gmail.com](mailto:easygoinglife2@gmail.com)
 - **Blog**: [https://dongjangoon.github.io/](https://dongjangoon.github.io/)
 - **GitHub**: [github.com/dongjangoon](https://github.com/dongjangoon)
-
----
 
 ## Career
 
