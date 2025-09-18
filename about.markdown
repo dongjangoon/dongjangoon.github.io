@@ -27,7 +27,6 @@ DevOps를 통해 더욱 편리한 개발 환경을 갖추고 모니터링의 표
 #### XXX 기관 Gen AI 플랫폼 구축 프로젝트 (2025.07 -)
 - NHN Cloud NKS의 PaaS 환경과 IaaS 환경에서의 Outer Architecture(K8s, Redis, Monitoring, Logging, Tracing) 부분을 담당
 - K8s 환경에서 GPU 노드를 사용하는 솔루션 설치 및 gpu-operator와 vllm을 통한 LLM 모델의 서빙을 구축
-- H100 SMX, Nvidia Driver 575.57.08, CUDA 12.8 환경에서 작업
 - 외부망과 내부망을 동시에 사용해야 하는 상황에서 CoreDNS 설정을 통해 내부 DNS 서버 및 멀티 클러스터 통신 환경 구축
 - Grafana, Prometheus, Opentelemetry Agent, Collector, Jaeger, EFK(OpenSearch 사용)으로 멀티 클러스터 환경에서 표준 모니터링 시스템 구축
 - Redis Instance 3개를 엮어 쿼럼을 갖춘 Sentinel 구성을 통해 HA 보장
