@@ -190,9 +190,7 @@ spec:
 
 ## 마무리
 
-이번 트러블슈팅을 통해 Kubernetes 환경에서는 컨테이너 런타임 레벨의 설정이 때로는 가장 근본적인 해결책이 될 수 있음을 깨달았습니다. 
-
-특히 **`/etc/security/limits.conf` 수정만으로는 부족**하다는 점이 중요한 교훈이었습니다. limits.conf는 새로운 사용자 세션에만 적용되며, 이미 실행 중인 systemd 서비스(containerd)나 파드에는 영향을 주지 않습니다. 따라서 containerd 서비스 자체의 systemd 설정을 수정하는 것이 필요했습니다.
+처음에는 워커 노드의 **`/etc/security/limits.conf` 수정으로 이 현상을 해결하려고 했었지만 불가능했습니다. limits.conf는 새로운 사용자 세션에만 적용되며, 이미 실행 중인 systemd 서비스(containerd)나 파드에는 영향을 주지 않습니다. 따라서 containerd 서비스 자체의 systemd 설정을 수정하는 것이 필요했습니다. (참고로 워커 노드의 OS는 Ubuntu 22.04였습니다.)
 
 또한 OpenSearch 같은 검색 엔진을 운영할 때는 다음 두 가지 시스템 설정이 모두 필요함을 확인했습니다:
 - **vm.max_map_count**: 메모리 맵 영역 제한 해제
