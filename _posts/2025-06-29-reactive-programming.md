@@ -24,6 +24,7 @@ notion_url: https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c
 1. **선언적 프로그래밍 (Declarative Programming)**
 1. **비동기성 (Asynchrony) 및 논블로킹 (Non-Blocking)**
 1. **역압 (Backpressure)**
+
 ### 리액티브 프로그래밍이 나오게 된 이유
 
 리액티브 프로그래밍이 등장하고 중요해진 배경에는 몇 가지 핵심적인 IT 환경의 변화가 있습니다.
@@ -42,6 +43,7 @@ notion_url: https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c
 1. **높은 동시성 처리 및 처리량 증가**:
 1. **자원 효율성**
 1. **응답성 향상**
+
 ### 리액티브 프로그래밍의 한계 및 고려사항
 
 하지만 리액티브 프로그래밍이 모든 상황에서 만능의 해결책은 아닙니다. 다음과 같은 단점과 고려사항이 있습니다.
@@ -50,6 +52,7 @@ notion_url: https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c
 1. **모든 작업에 적합하지 않음**
 1. **생태계 지원**
 1. **역압(Backpressure) 관리의 어려움**
+
 ### 결론
 
 서버 환경에서 리액티브 프로그래밍은 다음과 같은 경우에 **매우 강력한 성능 이점**을 제공합니다:
@@ -74,6 +77,7 @@ notion_url: https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c
 1. **높은 동시성 처리 및 처리량 증가**
 1. **자원 효율성**
 1. **응답성 향상**
+
 ### 리액티브 프로그래밍의 한계 및 고려사항
 
 하지만 리액티브 프로그래밍이 모든 상황에서 만능의 해결책은 아닙니다. 다음과 같은 단점과 고려사항이 있습니다.
@@ -82,6 +86,7 @@ notion_url: https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c
 1. **모든 작업에 적합하지 않음**
 1. **생태계 지원**
 1. **역압(Backpressure) 관리의 어려움**
+
 ### 결론
 
 서버 환경에서 리액티브 프로그래밍은 다음과 같은 경우에 **매우 강력한 성능 이점**을 제공합니다.
@@ -106,6 +111,7 @@ Spring WebFlux와 Reactor는 **깊은 관계**를 가지고 있습니다. 간단
 - **논블로킹(Non-Blocking)**: Reactor는 스레드가 결과를 기다리는 동안 다른 작업을 수행할 수 있도록 하여 리소스 효율성을 높입니다.
 - **스케줄러(Scheduler)**: Reactor는 스레드 관리자 역할을 하는 스케줄러를 제공하여, 리액티브 시퀀스에서 작업이 실행되는 스레드를 제어할 수 있게 합니다. 이를 통해 복잡한 멀티스레딩 로직을 손쉽게 구현할 수 있습니다.
 - **다양한 연산자(Operators)**: `map`, `flatMap`, `filter` 등과 같이 데이터를 변환하거나 조합하는 수많은 연산자를 제공하여 비동기 데이터 스트림을 유연하게 처리할 수 있습니다.
+
 ### Spring WebFlux와 Reactor의 관계
 
 - **기반 기술**: Spring WebFlux는 리액티브 스택 웹 프레임워크이며, 그 내부적으로 **Project Reactor를 핵심 기반 기술**로 사용합니다. 즉, Spring WebFlux를 사용하면 자연스럽게 Reactor의 `Mono`와 `Flux` 타입을 사용하여 비동기 논블로킹 웹 애플리케이션을 개발하게 됩니다.

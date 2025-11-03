@@ -13,7 +13,6 @@ notion_url: https://www.notion.so/Prometheus-CRD-Monitor-Prometheus-Metric-21aee
 
 **ServiceMonitor**는 Kubernetes Service를 통해 메트릭을 수집합니다. Prometheus Operator가 ServiceMonitor 리소스를 감시하다가 새로운 ServiceMonitor가 생성되면, 해당 ServiceMonitor의 selector와 매칭되는 Service를 찾고, 그 Service의 엔드포인트들을 Prometheus 설정에 자동으로 추가합니다. Service의 포트 중에서 메트릭 수집용으로 지정된 포트로 스크래핑을 수행합니다.
 
-
 <!--more-->
 **PodMonitor**는 Service를 거치지 않고 Pod를 직접 타겟으로 합니다. PodMonitor의 selector 조건에 맞는 Pod들을 직접 찾아서 메트릭을 수집합니다. 이는 Service가 없거나 Service를 통하지 않고 직접 Pod에서 메트릭을 가져와야 하는 경우에 유용합니다.
 
@@ -34,8 +33,6 @@ notion_url: https://www.notion.so/Prometheus-CRD-Monitor-Prometheus-Metric-21aee
 **고가용성 환경**에서는 여러 Prometheus 인스턴스가 같은 타겟을 중복으로 스크래핑하지 않도록 샤딩 설정을 고려해야 합니다.
 
 마지막으로 **애플리케이션 준비성**을 확인해야 합니다. 애플리케이션이 실제로 메트릭 엔드포인트를 제공하고 있는지, 메트릭 형식이 Prometheus와 호환되는지 사전에 검증하는 것이 중요합니다.
-
-statefulset, Deployment → scape time, interval, 
 
 ## Prometheus와 ServiceMonitor 연결 메커니즘
 
@@ -85,7 +82,7 @@ spec:
 
 # Prometheus CRD
 
-`**Prometheus**`:
+**Prometheus**:
 
 - **역할**: Kubernetes 클러스터에 배포할 Prometheus 서버 인스턴스를 선언적으로 정의합니다.
 - **기능**: Prometheus의 버전, 영구 저장소, 복제본 수, Alertmanager로 알림을 보낼 설정 등을 지정할 수 있습니다.
@@ -96,7 +93,7 @@ spec:
 
 Prometheus 메트릭은 기본적으로 다음과 같은 구조를 가집니다:
 
-`**metric_name{label_name="label_value", ...}**`** value**
+`metric_name{label_name="label_value", ...} value`
 
 각 구성 요소는 다음과 같은 의미를 가집니다:
 
@@ -109,20 +106,49 @@ io micrometer
 
 - `http_requests_total{method="post", path="/api/users", status="200"} 1024`
 - `node_cpu_usage_seconds_total{cpu="0", mode="idle"} 12345.67`
+
 ### Prometheus 메트릭의 타입
 
 Prometheus는 수집하는 데이터의 특성에 따라 네 가지 핵심 메트릭 타입을 정의합니다. 각 타입은 서로 다른 용도와 의미를 가집니다.
 
 1. **카운터 (Counter)**:
-1. **게이지 (Gauge)**:
-1. **히스토그램 (Histogram)**:
-1. **요약 (Summary)**:
+    - **특징**: 단조롭게 증가하는(monotonically increasing) 단일 숫자 값입니다. 재시작 시 0으로 재설정될 수 있습니다.
+    - **용도**: 서비스에서 발생한 총 요청 수, 완료된 작업 수, 오류 발생 횟수 등과 같이 **누적되는 값**을 측정할 때 사용됩니다.
+    - **예시**: `http_requests_total` (총 HTTP 요청 수), `node_network_receive_bytes_total` (총 수신 바이트 수).
+    - **활용**: `rate()` 함수나 `irate()` 함수를 사용하여 초당 증가율을 계산하는 데 주로 사용됩니다.
+2. **게이지 (Gauge)**:
+    - **특징**: 임의로 오르내릴 수 있는 단일 숫자 값입니다.
+    - **용도**: 현재 온도, 현재 메모리 사용량, 현재 동시 접속자 수, 큐에 대기 중인 항목 수 등과 같이 **현재 상태 또는 측정치**를 나타낼 때 사용됩니다.
+    - **예시**: `node_memory_active_bytes` (활성 메모리 사용량), `temperature_celsius` (현재 온도), `go_goroutines` (현재 고루틴 수).
+    - **활용**: 직접적인 현재 값을 보거나, `delta()` 함수를 사용하여 값의 변화량을 확인할 수 있습니다.
+3. **히스토그램 (Histogram)**:
+    - **특징**: 관측된 값의 표본을 버킷(bucket)으로 분류하고, 각 버킷의 개수를 추적합니다. 또한 모든 관측치의 총합(sum)과 총 개수(count)도 제공합니다.
+    - **용도**: 요청 처리 시간, 응답 크기 등과 같이 **분포를 알고 싶은 값**을 측정할 때 사용됩니다. 주로 지연 시간(latency)을 측정하는 데 유용합니다.
+    - **제공되는 메트릭**:
+        - `_bucket{le="..."}`: 각 버킷의 누적 개수 (less than or equal to).
+        - `_sum`: 관측된 모든 값의 합계.
+        - `_count`: 관측된 총 값의 개수.
+    - **예시**: `http_request_duration_seconds_bucket`, `http_request_duration_seconds_sum`, `http_request_duration_seconds_count`.
+    - **활용**: `histogram_quantile()` 함수를 사용하여 분위수(percentiles, 예: P90, P99)를 계산하여 분포를 이해하는 데 사용됩니다.
+4. **요약 (Summary)**:
+    - **특징**: 클라이언트 측에서 구성 가능한 분위수(quantiles)를 계산합니다. 또한 모든 관측치의 총합(sum)과 총 개수(count)를 제공합니다. 히스토그램과 달리 서버 측에서 분위수를 계산하지 않고, 클라이언트 측에서 미리 계산하여 전송합니다.
+    - **용도**: 히스토그램과 유사하게 분포를 측정하지만, 클라이언트 측에서 미리 계산된 분위수를 제공합니다. 네트워크 비용이 높거나 데이터의 양이 매우 큰 경우에 유리할 수 있습니다.
+    - **제공되는 메트릭**:
+        - `{quantile="..."}`: 미리 계산된 분위수 (예: P0.5, P0.9, P0.99).
+        - `_sum`: 관측된 모든 값의 합계.
+        - `_count`: 관측된 총 값의 개수.
+    - **예시**: `http_request_duration_seconds{quantile="0.99"}`, `http_request_duration_seconds_sum`, `http_request_duration_seconds_count`.
+    - **단점**: 클라이언트 측에서 계산된 분위수는 Prometheus 서버의 집계 기능을 활용하기 어렵고, 레이블 변경에 취약할 수 있습니다. 일반적으로 **히스토그램 사용이 더 권장**됩니다.
+
 ## Exporter API 요청 및 응답 구조
 
 - /metrics 엔드포인트로 API 요청을 보내면 응답은 기본적으로 **Prometheus exposition format**이라는 특정 텍스트 기반 형식으로 나옵니다.
 - 이 텍스트 형식은 사람이 읽기 쉽고, 각 메트릭의 이름, 타입, 설명, 레이블 및 현재 값을 라인 단위로 표시합니다.
 - Content-Type 헤더:
-Prometheus의 /metrics 엔드포인트의 표준 Content-Type은 일반적으로 다음과 같습니다:
+  Prometheus의 /metrics 엔드포인트의 표준 Content-Type은 일반적으로 다음과 같습니다:
+    - text/plain; version=0.0.4: 이것이 가장 흔하고 널리 사용되는 기본 형식입니다.
+    - application/openmetrics-text; version=1.0.0: OpenMetrics는 Prometheus exposition format의 표준화를 목표로 하는 프로젝트이며, 더 현대적이고 엄격한 사양을 제공합니다. 일부 최신 클라이언트 라이브러리나 익스포터는 Accept 헤더에 따라 이 형식을 기본으로 제공하거나 지원할 수 있습니다.
+    - Prometheus 서버가 /metrics 엔드포인트에 요청을 보낼 때, 일반적으로 Accept 헤더를 통해 자신이 지원하는 메트릭 포맷들을 명시합니다. 그러면 메트릭을 노출하는 애플리케이션(Exporter)은 이 Accept 헤더를 보고 가장 적절한 포맷으로 응답을 돌려줍니다. 만약 Accept 헤더가 없거나 적절한 포맷을 찾지 못하면, 대부분의 구현체는 기본적으로 text/plain; version=0.0.4 형식으로 응답합니다.
 - 일부 모니터링 시스템이나 특정 익스포터는 Prometheus 형식 외에 JSON, CSV 등 다른 형식으로도 메트릭을 노출하는 옵션을 제공할 수 있지만, 이는 Prometheus 생태계의 표준 방식은 아닙니다. Prometheus와 연동하려면 Prometheus exposition format을 따라야 합니다.
 
 ---

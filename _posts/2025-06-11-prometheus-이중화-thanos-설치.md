@@ -57,6 +57,7 @@ notion_url: https://www.notion.so/Prometheus-Thanos-20feef64a1ca8002846eebdee3cf
 ### 1. ebs csi driver 설치를 위한 IAM Policy 적용
 
 - 워커 노드에 `AmazonEBSCSIDriver` Policy가 적용된 IAM Role을 적용함
+
 ### 2. S3를 위한 gp3 storageclass 설치
 
 ```yaml

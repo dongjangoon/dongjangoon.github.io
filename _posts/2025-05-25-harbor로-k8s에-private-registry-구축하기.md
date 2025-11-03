@@ -24,14 +24,17 @@ notion_url: https://www.notion.so/Harbor-k8s-Private-Registry-1feeef64a1ca801b98
 - Harbor는 메타데이터를 PostgreSQL DB에, 실제 이미지 레이어를 파일시스템(Registry storage)에 저장
 - PV/PVC가 변경되면서 DB와 실제 스토리지 간 동기화 문제 발생 가능
 - 콘솔은 DB 메타데이터를 보여주지만, API는 실제 레지스트리 스토리지를 확인
+
 ### 해결
 
 - 새로 이미지를 푸시해서 해결
+
 ## 2. GPU 노드에 taint를 걸고 클러스터 재기동할 때 나타나는 에러
 
 - 파드 중 일부가 배치되어 있던 GPU 노드에 `gpu: true=NoSchedule` 이라는 taint를 추가함
 - 클러스터를 재기동하며 파드가 다시 스케줄링 될 때 기존에 gpu 노드에 있던 파드들이 `worker1` 로 옮겨져야 함
 - 하지만 worker1에도 `volume node affinity conflict` 라는 에러가 발생해서 새로운 pod가 pending 상태임
+
 ### 원인
 
 - 해당 에러를 검색해보면, PV가 특정 노드에 바인딩되어 있는데 해당 노드를 사용하지 못하거나 제약이 있을 때 발생한다고 함
@@ -40,10 +43,12 @@ notion_url: https://www.notion.so/Harbor-k8s-Private-Registry-1feeef64a1ca801b98
 - `local-path` StorageClass는 파드가 처음 생성된 노드에 PV를 생성하고 해당 노드에 affinity를 설정
 - 클러스터 재시작 후 새로운 파드들이 생성되려고 하지만, PV는 여전히 `worker2-gpu`에 바인딩되어 있음
 - `worker2-gpu`에는 taint가 있어서 Harbor 파드들이 스케줄링될 수 없음
+
 ### 해결
 
 - `local-path` StorageClass를 사용하는 PV의 경우, nodeAffinity만 변경하면 실제 데이터가 있는 디렉토리와 맞지 않아서 문제가 발생함
 - 따라서 다음과 같은 과정을 통해 데이터 백업을 진행하고 harbor를 재설치해야 함
+
 ### 1단계: Harbor 데이터 백업
 
 ```shell
@@ -141,6 +146,7 @@ kubectl exec -n harbor harbor-registry-6c8797fd48-kzckk -c registry -- find /sto
 - 인증서 에러 발생
 - Harbor 레지스트리가 자체 서명된(self-signed) 인증서 또는 공인되지 않은 CA(Certificate Authority)에 의해 서명된 인증서를 사용하고 있기 때문에 발생
 - Kubernetes 노드의 `kubelet`이 해당 인증서를 신뢰하지 못해서 이미지 pull을 실패
+
 ### 해결
 
 ### 1. 인증서 복사
@@ -148,6 +154,7 @@ kubectl exec -n harbor harbor-registry-6c8797fd48-kzckk -c registry -- find /sto
 - Kubernetes 클러스터의 모든 노드에 Harbor 레지스트리의 CA 인증서를 신뢰하도록 설정
 - Harbor를 배포하면서 생겨난 `ca.crt` 파일을 복사하여 워커 노드의 `/etc/containerd/certs.d/15.165.92.201:30003` 해당 경로에 붙여넣기
 - 추가로 시스템 CA 저장소에도 복사
+
 ```bash
 sudo cp /etc/containerd/certs.d/15.165.92.201:30003/ca.crt /usr/local/share/ca-certificates/harbor_ca.crt
 sudo chmod 644 /usr/local/share/ca-certificates/harbor_ca.crt
@@ -157,12 +164,13 @@ sudo update-ca-certificates
 ### 2. containerd 설정 확인하기
 
 - `/etc/containerd/config.toml` 에 설정 필요
+
 ```bash
 [plugins."io.containerd.cri.v1.images".registry]
     config_path = "/etc/containerd/certs.d"
 ```
-
 - 위 설정이 없으면 안됨
+
 ### 3. containerd, kubelet 재시작
 
 ```bash
