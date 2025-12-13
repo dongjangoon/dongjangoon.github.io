@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "nvidia.com/gpu를 지정하지 않았을 때 발생하는 현상"
 date: 2025-12-13 00:00:00 +0000
 categories: [kubernetes]
