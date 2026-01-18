@@ -37,12 +37,5 @@
       localStorage.setItem('theme', newTheme);
     });
 
-    // Also check for system preference
-    if (!localStorage.getItem('theme')) {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      if (prefersDark) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    }
   });
 })();
