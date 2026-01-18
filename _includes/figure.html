@@ -1,0 +1,8 @@
+<figure class="{{ include.class }}">
+  {%- if include.link %}<a href="{{ include.link }}">{%- endif -%}
+  <img src="{{ include.image_path }}" alt="{{ include.alt }}">
+  {%- if include.link %}</a>{%- endif -%}
+  {%- if include.caption %}
+  <figcaption>{{ include.caption }}</figcaption>
+  {%- endif %}
+</figure>
