@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "vCPU와 하이퍼스레딩: 물리코어부터 Kubernetes까지"
-date: 2025-01-27 11:00:00 +0900
+date: 2026-01-27 11:00:00 +0900
 categories: infrastructure
 tags: [cpu, vcpu, hyperthreading, smt, kubernetes, cloud, virtualization, performance]
 excerpt: "192코어 서버의 vCPU는 몇 개일까? 하이퍼스레딩, 물리코어, 논리코어, vCPU의 관계를 이해하고 Kubernetes와 클라우드 환경에서 CPU 리소스를 제대로 활용하는 방법을 알아봅니다."

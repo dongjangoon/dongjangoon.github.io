@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Linux Systemd: 프로세스 관리의 핵심을 이해하자"
-date: 2025-01-27 10:00:00 +0900
+date: 2026-01-27 10:00:00 +0900
 categories: linux
 tags: [linux, systemd, process, init, daemon, cgroups, service-management]
 excerpt: "터미널에서 실행한 프로세스와 systemd로 등록한 서비스는 어떻게 다를까? Linux의 심장인 systemd와 프로세스 관리의 핵심 개념들을 살펴봅니다."
