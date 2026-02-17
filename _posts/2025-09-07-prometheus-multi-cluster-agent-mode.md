@@ -298,13 +298,3 @@ writeRelabelConfigs:
 Prometheus Agent 모드와 Remote Write를 활용한 멀티 클러스터 모니터링은 리소스 효율성과 운영 복잡도 측면에서 기존 Federation 방식보다 많은 장점을 제공합니다. 특히 클러스터 간 네트워크 제약이 있는 환경이나 리소스가 제한된 환경에서 효과적인 솔루션입니다.
 
 다만 네트워크 안정성과 중앙 집중화에 따른 단일 장애점 문제는 별도의 고가용성 설계를 통해 보완해야 합니다. 실제 프로덕션 환경에서는 보안 설정, 메트릭 필터링, 큐 최적화 등의 세부 튜닝이 필요하며, 이를 통해 안정적이고 효율적인 멀티 클러스터 모니터링 시스템을 구축할 수 있습니다.
-
----
-
-**다음 포스트 예고**
-다음에는 **"CoreDNS와 내부 DNS 서버 통신: Kubernetes 클러스터 간 서비스 디스커버리 구현"**에 대해 다루겠습니다.
-
-**관련 포스트**
-- [Prometheus 고가용성 구성하기](/kubernetes/monitoring/2024/12/15/prometheus-ha-thanos/)
-- [Kubernetes 모니터링 스택 구축하기](/kubernetes/monitoring/2024/11/20/kubernetes-monitoring-stack/)
-- [Grafana 멀티 클러스터 대시보드 구성](/monitoring/2024/10/10/grafana-multicluster-dashboard/)

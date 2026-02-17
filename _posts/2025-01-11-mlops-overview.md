@@ -5,8 +5,6 @@ date: 2025-01-11 14:14:00 +0000
 categories: ai
 tags: [tech, ai, machine-learning]
 excerpt: "연구원이 작성한 학습 코드를 통해 프로덕션 환경에 배포하고, 적절한 Trigger에 따라 프로덕션에서 학습을 진행"
-notion_id: 178eef64-a1ca-80eb-96d6-e14d691b64db
-notion_url: https://www.notion.so/MLOps-Overview-178eef64a1ca80eb96d6e14d691b64db
 ---
 
 # MLOps란?
@@ -102,7 +100,3 @@ ML 프로덕션 파이프라인을 자동화하여 새로운 데이터로 모델
 
 - 학습 코드 파이프라인을 컨테이너로 묶어, 이미지를 만드는 형태로 진행
 - 배포에 대한 테스트
-
----
-
-*Originally published in [Notion](https://www.notion.so/MLOps-Overview-178eef64a1ca80eb96d6e14d691b64db) on January 11, 2025*

@@ -5,8 +5,6 @@ date: 2025-02-21 13:15:00 +0000
 categories: kubernetes
 tags: [tech, istio, service-mesh]
 excerpt: "컨테이너 애플리케이션의 배포, 확장, 관리를 자동화하는 Orchestration System"
-notion_id: 1a1eef64-a1ca-80d5-a5aa-f50d5e3e58ec
-notion_url: https://www.notion.so/Service-Mesh-Istio-1a1eef64a1ca80d5a5aaf50d5e3e58ec
 ---
 
 # Overview
@@ -149,7 +147,3 @@ notion_url: https://www.notion.so/Service-Mesh-Istio-1a1eef64a1ca80d5a5aaf50d5e3
 - 트래픽 분배 최적화
 - 연결 풀 관리로 성능 최적화
 - 보안 강화
-
----
-
-*Originally published in [Notion](https://www.notion.so/Service-Mesh-Istio-1a1eef64a1ca80d5a5aaf50d5e3e58ec) on February 21, 2025*

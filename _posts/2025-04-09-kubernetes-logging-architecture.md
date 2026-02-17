@@ -5,8 +5,6 @@ date: 2025-04-09 10:45:00 +0000
 categories: kubernetes
 tags: [kubernetes, k8s, logging, architecture, tech]
 excerpt: "로그 파일은 기본적으로 하나하나는 용량이 작을 수 있지만, 쌓이다 보면 그것이 커져 시스템 성능에 영향을 줄 수 있다."
-notion_id: 1d0eef64-a1ca-80fa-8fd3-e1bd3f272965
-notion_url: https://www.notion.so/Kubernetes-Logging-Architecture-1d0eef64a1ca80fa8fd3e1bd3f272965
 ---
 
 # Kubernetes Logging Architecture

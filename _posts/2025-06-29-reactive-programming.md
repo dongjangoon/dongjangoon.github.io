@@ -5,8 +5,6 @@ date: 2025-06-29 11:28:00 +0000
 categories: development
 tags: [reactive, programming, async, streams, tech]
 excerpt: "리액티브 프로그래밍은 데이터 스트림과 변경 전파에 초점을 맞춘 선언적 프로그래밍 패러다임입니다."
-notion_id: 221eef64-a1ca-8088-9f2b-e8a4c6d10e98
-notion_url: https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c6d10e98
 ---
 
 # Reactive Programming
@@ -117,7 +115,3 @@ Spring WebFlux와 Reactor는 **깊은 관계**를 가지고 있습니다. 간단
 - **기반 기술**: Spring WebFlux는 리액티브 스택 웹 프레임워크이며, 그 내부적으로 **Project Reactor를 핵심 기반 기술**로 사용합니다. 즉, Spring WebFlux를 사용하면 자연스럽게 Reactor의 `Mono`와 `Flux` 타입을 사용하여 비동기 논블로킹 웹 애플리케이션을 개발하게 됩니다.
 - **패러다임 전환**: 전통적인 Spring MVC가 요청당 스레드를 할당하는 Blocking 방식인 반면, Spring WebFlux는 Reactor의 논블로킹 특성을 활용하여 소수의 스레드로 많은 동시 요청을 효율적으로 처리하는 **이벤트 루프 모델**을 따릅니다.
 - **공식 지원**: Spring Framework 5부터 리액티브 프로그래밍을 위해 Reactor가 공식적으로 지원되는 라이브러리입니다.
-
----
-
-*Originally published in [Notion](https://www.notion.so/Reactive-Programming-221eef64a1ca80889f2be8a4c6d10e98) on June 29, 2025*
