@@ -1,0 +1,33 @@
+// Firestore Security Rules for Blog Analytics
+// Firebase Console > Firestore Database > Rules 에 붙여넣으세요
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 전역 통계 - 모든 사용자 읽기/쓰기 허용 (간단한 카운터)
+    match /stats/{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // 포스트 통계
+    match /posts/{postSlug} {
+      // 읽기는 모두 허용
+      allow read: if true;
+
+      // 쓰기는 views와 likes 필드만 허용
+      allow create: if true;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys()
+                       .hasOnly(['views', 'likes']);
+    }
+
+    // 좋아요 기록 - 사용자별 1개만 허용
+    match /posts/{postSlug}/likedBy/{visitorId} {
+      // 자신의 좋아요 기록만 읽기/쓰기 가능
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['timestamp']);
+      allow delete: if true;
+    }
+  }
+}

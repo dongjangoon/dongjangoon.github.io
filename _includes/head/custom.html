@@ -1,6 +1,36 @@
 <!-- Pretendard Font -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
 
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+  import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+  import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+
+  // TODO: Firebase Console에서 설정 값을 복사해서 붙여넣으세요
+  // https://console.firebase.google.com > 프로젝트 설정 > 일반 > 내 앱 > SDK 설정 및 구성
+  const firebaseConfig = {
+    apiKey: "AIzaSyA24LG-wiviiHU7l8ks1-xeXz1lHbKzeog",
+    authDomain: "dongjangoon-blog.firebaseapp.com",
+    projectId: "dongjangoon-blog",
+    storageBucket: "dongjangoon-blog.firebasestorage.app",
+    messagingSenderId: "928528468075",
+    appId: "1:928528468075:web:a6017ac00cc961ba8a092e",
+    measurementId: "G-9CNB283KD2"  
+  };
+
+  // Firebase 초기화
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  // 전역으로 노출
+  window.firebaseApp = app;
+  window.firebaseDb = db;
+  window.firebaseAuth = auth;
+  window.signInAnonymously = signInAnonymously;
+</script>
+
 <!-- Dark Mode - Apply theme immediately to prevent flash -->
 <script>
   (function() {
