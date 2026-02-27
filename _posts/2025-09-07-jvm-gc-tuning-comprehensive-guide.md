@@ -2,6 +2,7 @@
 layout: single
 title: "JVM 설정과 GC 튜닝: 실무 가이드"
 date: 2025-09-07 13:00:00 +0000
+last_modified_at: 2025-09-14
 categories: development
 tags: [jvm, gc, garbage-collection, java-tuning, parallel-gc, g1-gc, cms-gc, memory-management]
 excerpt: "Java 애플리케이션 성능 최적화를 위한 JVM 설정과 Garbage Collection 튜닝 실무 가이드. 실제 프로젝트 설정 예시와 함께 살펴봅니다."

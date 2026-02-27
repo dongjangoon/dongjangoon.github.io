@@ -2,6 +2,7 @@
 layout: single
 title: "k3s에서 vLLM GPU 서빙 환경 구축하기"
 date: 2025-01-11 00:00:00 +0000
+last_modified_at: 2026-02-18
 categories: [infrastructure, kubernetes]
 tags: [vllm, kubernetes, k3s, gpu, nvidia, llm, deployment, container-toolkit]
 excerpt: "k3s 클러스터에서 RTX 5070 Ti GPU를 활용한 vLLM 배포 가이드입니다. NVIDIA Container Toolkit 설정부터 모니터링까지 전체 과정을 다룹니다."

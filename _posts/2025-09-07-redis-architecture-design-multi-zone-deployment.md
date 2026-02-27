@@ -2,6 +2,7 @@
 layout: single
 title: "Redis 아키텍처 설계: 멀티 영역 환경에서의 배치 전략"
 date: 2025-09-07 14:00:00 +0000
+last_modified_at: 2025-09-14
 categories: infrastructure
 tags: [redis, architecture, high-availability, cluster, sentinel, caching, multi-zone]
 excerpt: "PaaS와 IaaS가 혼재된 멀티 영역 환경에서 Redis를 효과적으로 배치하는 전략과 실제 구현 방법을 살펴봅니다."

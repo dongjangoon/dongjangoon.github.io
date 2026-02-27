@@ -2,6 +2,7 @@
 layout: single
 title: "MLOps Overview"
 date: 2025-01-11 14:14:00 +0000
+last_modified_at: 2026-02-18
 categories: ai
 tags: [tech, ai, machine-learning]
 excerpt: "연구원이 작성한 학습 코드를 통해 프로덕션 환경에 배포하고, 적절한 Trigger에 따라 프로덕션에서 학습을 진행"

@@ -2,6 +2,7 @@
 layout: single
 title: "Prometheus CRD(ServiceMonitor, PodMonitor)와 Metric 구조"
 date: 2025-06-22 06:03:00 +0000
+last_modified_at: 2026-02-17
 categories: [monitoring]
 tags: [prometheus, kubernetes, servicemonitor, podmonitor, metrics]
 excerpt: "Prometheus Operator의 핵심 CRD인 ServiceMonitor와 PodMonitor의 동작 원리, 그리고 Prometheus 메트릭의 구조와 타입을 알아봅니다."

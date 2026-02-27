@@ -2,6 +2,7 @@
 layout: single
 title: "쿠버네티스 모니터링 완벽 가이드: 트레이싱, 로깅, 메트릭"
 date: 2025-04-08 09:47:00 +0000
+last_modified_at: 2026-02-18
 categories: monitoring
 tags: [kubernetes, monitoring, prometheus, grafana, loki, tempo, opentelemetry, observability]
 excerpt: "Prometheus, Grafana, Loki, OpenTelemetry를 사용하여 쿠버네티스 클러스터를 모니터링하는 종합 가이드: 메트릭, 로그, 트레이스의 세 가지 관찰성 기둥"

@@ -2,6 +2,7 @@
 layout: single
 title: "Kubernetes Operator 패턴과 CRD(Custom Resource Definition)"
 date: 2025-07-01 13:36:00 +0000
+last_modified_at: 2026-02-17
 categories: [kubernetes]
 tags: [kubernetes, operator, crd, controller]
 excerpt: "Kubernetes Operator 패턴과 Custom Resource Definition(CRD)을 활용하여 복잡한 애플리케이션 운영을 자동화하는 방법을 알아봅니다."

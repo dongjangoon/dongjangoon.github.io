@@ -2,6 +2,7 @@
 layout: single
 title: "Langfuse와 LiteLLM으로 LLM 트레이싱 구축하기 — Kubernetes 배포부터 Grafana Tempo 연동까지"
 date: 2026-02-08 10:00:00 +0900
+last_modified_at: 2026-02-18
 categories: llm-ops
 tags: [langfuse, litellm, llm, tracing, observability, opentelemetry, grafana, tempo, kubernetes, helm]
 excerpt: "LLM 애플리케이션은 전통적인 소프트웨어와 달리 비결정적이고, 체이닝된 호출 구조가 복잡하며, 프롬프트-응답의 품질을 정량화하기 어렵습니다. Langfuse와 LiteLLM을 Kubernetes 환경에 구축하고, OpenTelemetry 기반으로 Grafana Tempo와 연동하여 기존 모니터링 스택에 LLM 트레이싱을 통합하는 방법을 다룹니다."

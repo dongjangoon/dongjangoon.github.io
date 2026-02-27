@@ -2,6 +2,7 @@
 layout: single
 title: "Kubernetes 운영 최적화: 스토리지, NTP 동기화, 헬스 프로브 설정"
 date: 2025-09-10 14:00:00 +0000
+last_modified_at: 2025-09-14
 categories: kubernetes
 tags: [storage, ntp, health-probe, storageclass, liveness, readiness, startup-probe]
 excerpt: "Kubernetes 클러스터의 안정적 운영을 위한 스토리지 설정, 시간 동기화, 헬스 프로브 최적화 가이드"

@@ -2,6 +2,7 @@
 layout: single
 title: "Alpine 기반 컨테이너의 Kubernetes DNS 해석 실패 트러블슈팅"
 date: 2025-10-03 14:30:00 +0900
+last_modified_at: 2025-10-04
 categories: infrastructure
 tags: [kubernetes, alpine, dns, musl, coredns, troubleshooting]
 excerpt: "폐쇄망 Kubernetes 환경에서 Alpine 기반 컨테이너의 외부 도메인 DNS 해석 실패 문제를 분석하고 해결한 과정을 공유합니다."

@@ -2,6 +2,7 @@
 layout: single
 title: "Redis Sentinel vs Redis Cluster"
 date: 2025-12-19 00:00:00 +0000
+last_modified_at: 2025-12-20
 categories: infrastructure
 tags: [redis, sentinel, cluster, high-availability, architecture, distributed-system, sharding]
 excerpt: "Redis Sentinel과 Redis Cluster의 아키텍처 차이점, 노드 구성 전략, 그리고 16384 해시 슬롯의 비밀까지 상세히 알아봅니다."

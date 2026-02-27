@@ -2,6 +2,7 @@
 layout: single
 title: "Harbor로 Kubernetes Private Registry 구축하기"
 date: 2025-05-25 08:48:00 +0000
+last_modified_at: 2026-02-17
 categories: [kubernetes]
 tags: [harbor, registry, kubernetes, container]
 excerpt: "Harbor를 사용하여 Kubernetes 클러스터에 Private Container Registry를 구축하고 운영하는 방법과 트러블슈팅 가이드를 다룹니다."

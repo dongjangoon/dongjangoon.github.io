@@ -2,6 +2,7 @@
 layout: single
 title: "LLM 추론의 Memory-Bound 특성과 배치 최적화"
 date: 2025-01-11 00:00:00 +0000
+last_modified_at: 2026-01-11
 categories: [ai, infrastructure]
 tags: [llm, vllm, gpu, inference, memory-bandwidth, prefill, decode, batch, optimization]
 excerpt: "LLM 추론이 왜 Memory-Bound인지, Prefill과 Decode 단계의 차이점, 그리고 Batch Size가 처리량에 미치는 영향을 RTX 5070 Ti 벤치마크 결과와 함께 살펴봅니다."

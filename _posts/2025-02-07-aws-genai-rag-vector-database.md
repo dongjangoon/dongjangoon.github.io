@@ -2,6 +2,7 @@
 layout: single
 title: "AWS에서 GenAI RAG를 구성하기 위한 Vector Database 알아보기"
 date: 2025-02-07 07:32:00 +0000
+last_modified_at: 2026-02-17
 categories: [ai]
 tags: [aws, genai, rag, vector-database, machine-learning]
 excerpt: "생성형 AI의 핵심인 RAG(검색 증강 생성)와 Vector Database의 개념, 동작 원리, 그리고 AWS에서의 활용 방법을 알아봅니다."

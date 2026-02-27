@@ -2,6 +2,7 @@
 layout: single
 title: "vLLM 내부 구조: CPU 스케줄링과 GPU Forward Pass, 그리고 Async Scheduling"
 date: 2026-02-08 10:00:00 +0900
+last_modified_at: 2026-02-18
 categories: mlops
 tags: [vllm, llm-serving, gpu, cuda, inference, scheduling, async-scheduling, paged-attention, continuous-batching]
 excerpt: "vLLM은 왜 필요한가? LLM 모델 자체는 토큰을 받아 logits을 출력하는 함수일 뿐인데, 수천 명이 동시에 요청을 보내면 누가 배치를 구성하고, 메모리를 관리하고, GPU를 쉬지 않게 할 것인가? 서빙 엔진의 역할부터 CPU 스케줄링과 GPU Forward Pass의 분리, Async Scheduling의 파이프라인 구조까지 vLLM V1의 내부를 깊이 있게 살펴봅니다."

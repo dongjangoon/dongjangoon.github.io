@@ -2,6 +2,7 @@
 layout: single
 title: "AWQ 양자화: 7B 모델이 3B보다 빠른 이유"
 date: 2025-01-11 00:00:00 +0000
+last_modified_at: 2026-01-11
 categories: [ai, infrastructure]
 tags: [llm, vllm, awq, quantization, gpu, inference, memory-bandwidth, optimization]
 excerpt: "AWQ 양자화가 LLM 추론 성능에 미치는 영향을 분석합니다. 왜 7B AWQ 모델이 3B FP16 모델보다 빠른지, 벤치마크 결과와 함께 그 원리를 설명합니다."

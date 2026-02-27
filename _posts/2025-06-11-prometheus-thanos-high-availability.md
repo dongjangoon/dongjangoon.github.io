@@ -2,6 +2,7 @@
 layout: single
 title: "Prometheus 이중화 + Thanos 설치 가이드"
 date: 2025-06-11 11:44:00 +0000
+last_modified_at: 2026-02-17
 categories: [monitoring]
 tags: [prometheus, thanos, monitoring, high-availability, kubernetes]
 excerpt: "Thanos와 Prometheus를 활용한 고가용성 모니터링 시스템 구축 및 이중화 설정 방법을 알아봅니다."

@@ -2,6 +2,7 @@
 layout: single
 title: "Tempo Tracing 트러블슈팅: HikariCP 커넥션과 긴 트레이스 문제"
 date: 2025-06-18 12:53:00 +0000
+last_modified_at: 2026-02-17
 categories: [monitoring]
 tags: [tempo, tracing, hikaricp, opentelemetry, spring]
 excerpt: "HikariCP 커넥션 유지 쿼리가 Tempo 트레이스에서 비정상적으로 긴 시간(19시간, 1시간)으로 표시되는 문제의 원인과 해결 방법을 알아봅니다."

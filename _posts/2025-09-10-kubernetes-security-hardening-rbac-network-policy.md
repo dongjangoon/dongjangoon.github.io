@@ -2,6 +2,7 @@
 layout: single
 title: "Kubernetes 보안 강화: RBAC, Security Context, Network Policy"
 date: 2025-09-10 01:00:00 +0000
+last_modified_at: 2025-09-14
 categories: kubernetes
 tags: [kubernetes, rbac, security, network-policy, pod-security, zero-trust]
 excerpt: "Zero Trust 아키텍처 구현을 위한 Kubernetes RBAC, Security Context, Network Policy 설정과 실무에서 검증된 보안 강화 전략을 상세히 다룹니다."

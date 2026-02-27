@@ -2,6 +2,7 @@
 layout: single
 title: "OpenSearch Kubernetes memlock 트러블슈팅"
 date: 2025-09-15 11:01:00 +0900
+last_modified_at: 2025-09-19
 categories: infrastructure
 tags: [opensearch, kubernetes, memlock, containerd, troubleshooting]
 excerpt: "Kubernetes 환경에서 OpenSearch 실행 시 발생한 JVM 메모리 잠금 오류 해결 과정을 공유합니다."

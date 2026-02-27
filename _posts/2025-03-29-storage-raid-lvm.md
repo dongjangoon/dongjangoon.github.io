@@ -2,6 +2,7 @@
 layout: single
 title: "스토리지와 RAID 아키텍처"
 date: 2025-03-29 14:40:00 +0000
+last_modified_at: 2026-02-17
 categories: [infrastructure]
 tags: [storage, raid, lvm, linux]
 excerpt: "RAID 구성과 LVM을 활용한 스토리지 아키텍처 설계 방법을 알아봅니다."

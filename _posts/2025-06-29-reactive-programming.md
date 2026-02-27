@@ -2,6 +2,7 @@
 layout: single
 title: "Reactive Programming"
 date: 2025-06-29 11:28:00 +0000
+last_modified_at: 2026-02-18
 categories: development
 tags: [reactive, programming, async, streams, tech]
 excerpt: "리액티브 프로그래밍은 데이터 스트림과 변경 전파에 초점을 맞춘 선언적 프로그래밍 패러다임입니다."

@@ -2,6 +2,7 @@
 layout: single
 title: "Agent-OS를 만나다 - 개발 생산성의 새로운 패러다임 [Claude Code 오픈소스 기여 도전기 #1]"
 date: 2025-09-13 20:30:00 +0900
+last_modified_at: 2025-09-14
 categories: development
 tags: [claude-code, agent-os, grafana, kafka, alloy, opensource]
 ---

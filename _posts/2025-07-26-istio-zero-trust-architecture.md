@@ -2,6 +2,7 @@
 layout: single
 title: "Istio를 활용한 제로 트러스트 아키텍처"
 date: 2025-07-26 04:42:00 +0000
+last_modified_at: 2026-02-17
 categories: [kubernetes]
 tags: [istio, service-mesh, zero-trust, security, kubernetes, mtls]
 excerpt: "Istio 서비스 메시를 활용한 제로 트러스트 아키텍처 구현과 mTLS를 통한 클러스터 내부 보안 강화 방안을 다룹니다."
