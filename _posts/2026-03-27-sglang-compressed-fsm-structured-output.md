@@ -30,9 +30,9 @@ LLM 기반 서비스를 운영하다 보면 반드시 마주치는 문제가 있
 
 LLM이 "대부분" 올바른 JSON을 출력하더라도, **가끔 형식을 벗어나면 파이프라인 전체가 실패**합니다. 후처리로 파싱을 시도하거나, 실패 시 재시도하는 방식은 근본적인 해결이 아닙니다.
 
-**Constrained decoding(구조화 출력)**은 이 문제에 대한 비교적 근본적인 접근입니다. LLM이 토큰을 생성할 때마다 문법 규칙에 맞는 토큰만 선택하도록 강제하여, **구조적 정확성을 보장**합니다.
+**Constrained decoding(구조화 출력)** 은 이 문제에 대한 비교적 근본적인 접근입니다. LLM이 토큰을 생성할 때마다 문법 규칙에 맞는 토큰만 선택하도록 강제하여, **구조적 정확성을 보장**합니다.
 
-SGLang은 여기서 한 걸음 더 나아갑니다. **Compressed FSM**이라는 최적화로, 구조화된 출력이 오히려 비제약 생성보다 **빠를 수 있다**는 흥미로운 결과를 보여줍니다.
+SGLang은 여기서 한 걸음 더 나아갑니다. **Compressed FSM** 이라는 최적화로, 구조화된 출력이 오히려 비제약 생성보다 **빠를 수 있다** 는 흥미로운 결과를 보여줍니다.
 
 [Part 1]({{ site.baseurl }}{% post_url 2026-03-26-sglang-architecture-deep-dive %})에서 SGLang 아키텍처의 전체 구조를, [Part 2]({{ site.baseurl }}{% post_url 2026-03-27-sglang-radixattention-vs-pagedattention %})에서 RadixAttention의 KV cache 전략을 다뤘습니다. 이 글에서는 세 번째 핵심 주제인 Compressed FSM과 구조화 출력 시스템을 공부하며 정리해 봤습니다.
 
@@ -154,7 +154,7 @@ FSM의 압축 과정을 단계별로 살펴보겠습니다.
 
 ### Jump-Forward 최적화
 
-압축 edge를 만난 시점에서 SGLang은 **Jump-forward**를 수행합니다. 모델의 forward pass 없이 결정론적 토큰들을 건너뛰고, 한 번의 prefill로 처리합니다.
+압축 edge를 만난 시점에서 SGLang은 **Jump-forward** 를 수행합니다. 모델의 forward pass 없이 결정론적 토큰들을 건너뛰고, 한 번의 prefill로 처리합니다.
 
 ```
 일반 FSM 처리 (forward pass 횟수):
@@ -185,7 +185,7 @@ Compressed FSM + Jump-Forward:
 
 ### Retokenization 처리
 
-Jump-forward에는 한 가지 기술적 도전이 있습니다. LLM의 토크나이저는 **문맥에 따라 같은 문자열을 다른 토큰 시퀀스로 인코딩**할 수 있습니다.
+Jump-forward에는 한 가지 기술적 도전이 있습니다. LLM의 Tokenizer는 **문맥에 따라 같은 문자열을 다른 토큰 시퀀스로 인코딩**할 수 있습니다.
 
 ```
 독립적 토큰화:
