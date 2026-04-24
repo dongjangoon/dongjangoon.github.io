@@ -43,7 +43,7 @@ JVM_OPTS="${JVM_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
 #JVM_OPTS="${JVM_OPTS} -verbose:gc"
 #JVM_OPTS="${JVM_OPTS} -XX:+PrintGCDetails"
 
-java $JVM_OPTS -Dspring.profiles.active=${SPRING_BOOT_PROFILE} -jar aapserver.jar
+java $JVM_OPTS -Dspring.profiles.active=${SPRING_BOOT_PROFILE} -jar app.jar
 ```
 
 **주요 특징:**
@@ -74,7 +74,7 @@ JAVA_OPTS="${JAVA_OPTS} -Dspring.backgroundpreinitializer.ignore=true"
 # GC 로그를 디버그 레벨로 설정, /var/log/app/gc.log 에 저장
 JAVA_OPTS="${JAVA_OPTS} -Xlog:gc*=debug:file=/var/log/app/gc.log:time,level,tags"
 
-exec java ${JAVA_OPTS} -jar /source001/boot.jar
+exec java ${JAVA_OPTS} -jar /app/boot.jar
 ```
 
 **주요 특징:**
