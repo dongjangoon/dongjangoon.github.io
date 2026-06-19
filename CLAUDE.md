@@ -65,6 +65,11 @@ New posts follow the naming convention: `YYYY-MM-DD-title-with-hyphens.md`
 **Writing Style Guidelines**:
 - 문장 끝에 콜론(`:`)을 사용하지 않음. 콜론 대신 마침표로 문장을 끝내거나 문장을 자연스럽게 마무리할 것
 - Bold 표시(`**텍스트**`) 뒤에 한글 조사가 올 경우 띄어쓰기 추가 (예: `**SMT** 를`, `**Unit** 이라는`)
+- **모든 글은 front matter 바로 아래, 본문(`## 들어가며`) 시작 전에 AI 작성 고지 블록을 넣을 것.** minimal-mistakes notice 형식으로 작성한다:
+  ```markdown
+  **🤖 이 글은 AI를 활용하여 작성되었습니다.**
+  {: .notice--info}
+  ```
 
 **Required front matter**:
 ```yaml
