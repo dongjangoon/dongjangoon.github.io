@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 430" font-family="-apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="430" fill="#ffffff"/>
+  <text x="400" y="32" text-anchor="middle" font-size="19" font-weight="700" fill="#1a1a1a">native FP4 vs 에뮬레이션 — 같은 4비트, 다른 경로</text>
+
+  <!-- ===== 에뮬레이션 lane ===== -->
+  <rect x="20" y="52" width="760" height="150" rx="8" fill="#fdf3ea" stroke="#e0a06a" stroke-width="1.5"/>
+  <text x="36" y="76" font-size="14" font-weight="700" fill="#a65b12">에뮬레이션 — Ampere / Ada / Hopper (FP4 연산 경로 없음)</text>
+
+  <!-- FP4 storage -->
+  <rect x="40" y="92" width="120" height="56" rx="6" fill="#fbe3c0" stroke="#e0903a" stroke-width="1.5"/>
+  <text x="100" y="116" text-anchor="middle" font-size="12.5" fill="#a65b12" font-weight="600">FP4 가중치</text>
+  <text x="100" y="133" text-anchor="middle" font-size="11.5" fill="#a65b12">4비트 저장</text>
+  <line x1="160" y1="120" x2="192" y2="120" stroke="#555" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- dequant -->
+  <rect x="194" y="92" width="150" height="56" rx="6" fill="#fde8d7" stroke="#d98a4a" stroke-width="1.5"/>
+  <text x="269" y="116" text-anchor="middle" font-size="12.5" fill="#9c4a13" font-weight="600">FP16으로 펴기</text>
+  <text x="269" y="133" text-anchor="middle" font-size="11.5" fill="#9c4a13">(dequantize)</text>
+  <line x1="344" y1="120" x2="376" y2="120" stroke="#555" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- fp16 matmul -->
+  <rect x="378" y="92" width="160" height="56" rx="6" fill="#fde8d7" stroke="#d98a4a" stroke-width="1.5"/>
+  <text x="458" y="116" text-anchor="middle" font-size="12.5" fill="#9c4a13" font-weight="600">FP16 행렬곱</text>
+  <text x="458" y="133" text-anchor="middle" font-size="11.5" fill="#9c4a13">(텐서코어, 16비트 계산)</text>
+  <line x1="538" y1="120" x2="570" y2="120" stroke="#555" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- output -->
+  <rect x="572" y="92" width="100" height="56" rx="6" fill="#eef0f3" stroke="#9aa3ad" stroke-width="1.5"/>
+  <text x="622" y="124" text-anchor="middle" font-size="12.5" fill="#444" font-weight="600">출력</text>
+
+  <text x="40" y="184" font-size="12.5" fill="#7a4a1a">메모리 절약 O (4비트 로드) · <tspan font-weight="700">연산 가속 X</tspan> — 16비트 계산 + 펴는 비용</text>
+
+  <!-- ===== native lane ===== -->
+  <rect x="20" y="232" width="760" height="150" rx="8" fill="#edf7f0" stroke="#5cae7a" stroke-width="1.5"/>
+  <text x="36" y="256" font-size="14" font-weight="700" fill="#22713f">native — Blackwell 5세대 텐서코어 (FP4 직접 계산)</text>
+
+  <!-- FP4 storage -->
+  <rect x="40" y="272" width="120" height="56" rx="6" fill="#fbe3c0" stroke="#e0903a" stroke-width="1.5"/>
+  <text x="100" y="296" text-anchor="middle" font-size="12.5" fill="#a65b12" font-weight="600">FP4 가중치</text>
+  <text x="100" y="313" text-anchor="middle" font-size="11.5" fill="#a65b12">4비트 저장</text>
+  <line x1="160" y1="300" x2="198" y2="300" stroke="#555" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- native tensor core -->
+  <rect x="200" y="272" width="300" height="56" rx="6" fill="#d9f0e1" stroke="#3f9c5a" stroke-width="1.5"/>
+  <text x="350" y="296" text-anchor="middle" font-size="12.5" fill="#1f6b3c" font-weight="600">텐서코어가 FP4를 직접 계산</text>
+  <text x="350" y="313" text-anchor="middle" font-size="11.5" fill="#1f6b3c">× 블록 스케일(FP8), FP32 누산</text>
+  <line x1="500" y1="300" x2="538" y2="300" stroke="#555" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- output -->
+  <rect x="540" y="272" width="100" height="56" rx="6" fill="#eef0f3" stroke="#9aa3ad" stroke-width="1.5"/>
+  <text x="590" y="304" text-anchor="middle" font-size="12.5" fill="#444" font-weight="600">출력</text>
+
+  <text x="40" y="364" font-size="12.5" fill="#1f6b3c">메모리 절약 O (4비트 로드) · <tspan font-weight="700">연산 가속 O</tspan> — 펴지 않고 하드웨어에서 바로 곱함</text>
+
+  <!-- 공통 시작 표시 -->
+  <text x="400" y="416" text-anchor="middle" font-size="12" fill="#888">같은 NVFP4 가중치라도 — 옛 GPU에선 메모리만 절약, Blackwell에선 연산까지 가속</text>
+</svg>
