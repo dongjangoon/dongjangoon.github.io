@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 520" font-family="-apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="780" height="520" fill="#ffffff"/>
+  <text x="390" y="34" text-anchor="middle" font-size="20" font-weight="700" fill="#1a1a1a">NVFP4 — Two-Level Scaling</text>
+
+  <!-- 1. 원본 텐서 -->
+  <rect x="60" y="58" width="660" height="46" rx="6" fill="#e8eef7" stroke="#3b6db3" stroke-width="1.5"/>
+  <text x="390" y="86" text-anchor="middle" font-size="15" fill="#1f4e8c">원본 가중치 텐서 — BF16 / FP32 (고정밀, 메모리 큼)</text>
+
+  <!-- arrow 1 -->
+  <line x1="390" y1="104" x2="390" y2="138" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="404" y="126" font-size="13" fill="#555">16개 값 단위로 블록 분할 → 각 값을 FP4(E2M1)로 저장</text>
+
+  <!-- 2. 블록들 (FP4 값 + 블록 스케일) -->
+  <!-- block group helper: 3 blocks -->
+  <!-- Block 1 -->
+  <g>
+    <rect x="60" y="150" width="200" height="72" rx="6" fill="#fdf5ea" stroke="#e0903a" stroke-width="1.5"/>
+    <text x="160" y="170" text-anchor="middle" font-size="13" fill="#a65b12" font-weight="600">블록 1 — 값 16개 (FP4)</text>
+    <g fill="#fbe3c0" stroke="#e0903a" stroke-width="1">
+      <rect x="74"  y="182" width="16" height="26" rx="2"/>
+      <rect x="94"  y="182" width="16" height="26" rx="2"/>
+      <rect x="114" y="182" width="16" height="26" rx="2"/>
+      <rect x="134" y="182" width="16" height="26" rx="2"/>
+      <rect x="154" y="182" width="16" height="26" rx="2"/>
+      <rect x="174" y="182" width="16" height="26" rx="2"/>
+    </g>
+    <text x="218" y="200" font-size="16" fill="#a65b12">···</text>
+  </g>
+  <!-- Block 2 -->
+  <g>
+    <rect x="290" y="150" width="200" height="72" rx="6" fill="#fdf5ea" stroke="#e0903a" stroke-width="1.5"/>
+    <text x="390" y="170" text-anchor="middle" font-size="13" fill="#a65b12" font-weight="600">블록 2 — 값 16개 (FP4)</text>
+    <g fill="#fbe3c0" stroke="#e0903a" stroke-width="1">
+      <rect x="304" y="182" width="16" height="26" rx="2"/>
+      <rect x="324" y="182" width="16" height="26" rx="2"/>
+      <rect x="344" y="182" width="16" height="26" rx="2"/>
+      <rect x="364" y="182" width="16" height="26" rx="2"/>
+      <rect x="384" y="182" width="16" height="26" rx="2"/>
+      <rect x="404" y="182" width="16" height="26" rx="2"/>
+    </g>
+    <text x="448" y="200" font-size="16" fill="#a65b12">···</text>
+  </g>
+  <!-- Block N -->
+  <g>
+    <rect x="520" y="150" width="200" height="72" rx="6" fill="#fdf5ea" stroke="#e0903a" stroke-width="1.5"/>
+    <text x="620" y="170" text-anchor="middle" font-size="13" fill="#a65b12" font-weight="600">블록 N — 값 16개 (FP4)</text>
+    <g fill="#fbe3c0" stroke="#e0903a" stroke-width="1">
+      <rect x="534" y="182" width="16" height="26" rx="2"/>
+      <rect x="554" y="182" width="16" height="26" rx="2"/>
+      <rect x="574" y="182" width="16" height="26" rx="2"/>
+      <rect x="594" y="182" width="16" height="26" rx="2"/>
+      <rect x="614" y="182" width="16" height="26" rx="2"/>
+      <rect x="634" y="182" width="16" height="26" rx="2"/>
+    </g>
+    <text x="678" y="200" font-size="16" fill="#a65b12">···</text>
+  </g>
+
+  <!-- arrows to block scales -->
+  <line x1="160" y1="222" x2="160" y2="250" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="390" y1="222" x2="390" y2="250" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="620" y1="222" x2="620" y2="250" stroke="#555" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- 3. 블록 스케일 (FP8) -->
+  <g font-size="12.5">
+    <rect x="76"  y="252" width="168" height="40" rx="6" fill="#e7f4ec" stroke="#3f9c5a" stroke-width="1.5"/>
+    <text x="160" y="269" text-anchor="middle" fill="#22713f" font-weight="600">블록 스케일 ①</text>
+    <text x="160" y="285" text-anchor="middle" fill="#22713f">FP8 (E4M3)</text>
+
+    <rect x="306" y="252" width="168" height="40" rx="6" fill="#e7f4ec" stroke="#3f9c5a" stroke-width="1.5"/>
+    <text x="390" y="269" text-anchor="middle" fill="#22713f" font-weight="600">블록 스케일 ②</text>
+    <text x="390" y="285" text-anchor="middle" fill="#22713f">FP8 (E4M3)</text>
+
+    <rect x="536" y="252" width="168" height="40" rx="6" fill="#e7f4ec" stroke="#3f9c5a" stroke-width="1.5"/>
+    <text x="620" y="269" text-anchor="middle" fill="#22713f" font-weight="600">블록 스케일 ⓝ</text>
+    <text x="620" y="285" text-anchor="middle" fill="#22713f">FP8 (E4M3)</text>
+  </g>
+  <text x="60" y="312" font-size="12" fill="#777">블록(16개)마다 1개씩 — 묶음 안의 세밀한 범위 차이를 잡음</text>
+
+  <!-- arrows to global -->
+  <line x1="160" y1="292" x2="320" y2="346" stroke="#999" stroke-width="1.2"/>
+  <line x1="390" y1="292" x2="390" y2="346" stroke="#999" stroke-width="1.2"/>
+  <line x1="620" y1="292" x2="460" y2="346" stroke="#999" stroke-width="1.2"/>
+
+  <!-- 4. 글로벌 스케일 (FP32) -->
+  <rect x="230" y="348" width="320" height="48" rx="6" fill="#f3e8f7" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="390" y="368" text-anchor="middle" font-size="14" fill="#6c3483" font-weight="600">글로벌 스케일 — FP32</text>
+  <text x="390" y="386" text-anchor="middle" font-size="12.5" fill="#6c3483">텐서 전체에 단 1개 (전체 스케일을 잡음)</text>
+
+  <!-- arrow to formula -->
+  <line x1="390" y1="396" x2="390" y2="426" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- 5. 복원 공식 -->
+  <rect x="90" y="430" width="600" height="56" rx="8" fill="#f7f7f7" stroke="#cccccc" stroke-width="1.5"/>
+  <text x="390" y="455" text-anchor="middle" font-size="15" fill="#1a1a1a" font-weight="600">복원값 ≈ FP4 값 × 블록 스케일(FP8) × 글로벌 스케일(FP32)</text>
+  <text x="390" y="476" text-anchor="middle" font-size="12" fill="#777">대부분 데이터는 4비트로 저장(메모리 절약), 소수의 고정밀 스케일로 정확도 복원</text>
+</svg>

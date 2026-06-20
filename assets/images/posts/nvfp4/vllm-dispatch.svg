@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620" font-family="-apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif">
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#555"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="620" fill="#ffffff"/>
+  <text x="400" y="28" text-anchor="middle" font-size="19" font-weight="700" fill="#1a1a1a">vLLM NVFP4 디스패치 체인</text>
+
+  <!-- 1. HF 모델 로드 -->
+  <rect x="300" y="44" width="200" height="42" rx="6" fill="#e8eef7" stroke="#3b6db3" stroke-width="1.5"/>
+  <text x="400" y="70" text-anchor="middle" font-size="13.5" fill="#1f4e8c" font-weight="600">HF 모델 로드</text>
+  <line x1="400" y1="86" x2="400" y2="102" stroke="#555" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- 2. config 읽기 -->
+  <rect x="272" y="104" width="256" height="52" rx="6" fill="#e8eef7" stroke="#3b6db3" stroke-width="1.5"/>
+  <text x="400" y="124" text-anchor="middle" font-size="13.5" fill="#1f4e8c" font-weight="600">양자화 config 읽기</text>
+  <text x="400" y="142" text-anchor="middle" font-size="11.5" fill="#1f4e8c">compressed-tensors / ModelOpt fp4</text>
+  <line x1="400" y1="156" x2="400" y2="172" stroke="#555" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- 3. 백엔드 선택 -->
+  <rect x="268" y="174" width="264" height="52" rx="6" fill="#e8eef7" stroke="#3b6db3" stroke-width="1.5"/>
+  <text x="400" y="194" text-anchor="middle" font-size="13.5" fill="#1f4e8c" font-weight="600">레이어별 백엔드 선택</text>
+  <text x="400" y="212" text-anchor="middle" font-size="11.5" fill="#1f4e8c">포맷 × SM × 라이브러리</text>
+  <line x1="400" y1="226" x2="400" y2="246" stroke="#555" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- 4. decision diamond -->
+  <polygon points="400,250 568,304 400,358 232,304" fill="#fdf6e3" stroke="#c9a227" stroke-width="1.8"/>
+  <text x="400" y="300" text-anchor="middle" font-size="13" fill="#8a6d1a" font-weight="700">native FP4 경로 가능?</text>
+  <text x="400" y="318" text-anchor="middle" font-size="10.5" fill="#8a6d1a">cutlass_scaled_mm_supports_fp4</text>
+
+  <!-- branches -->
+  <line x1="232" y1="304" x2="190" y2="386" stroke="#3f9c5a" stroke-width="1.8" marker-end="url(#a)"/>
+  <text x="196" y="345" text-anchor="middle" font-size="12" font-weight="700" fill="#2f8049">예</text>
+  <line x1="568" y1="304" x2="610" y2="386" stroke="#d98a4a" stroke-width="1.8" marker-end="url(#a)"/>
+  <text x="604" y="345" text-anchor="middle" font-size="12" font-weight="700" fill="#b5652a">아니오</text>
+
+  <!-- native box -->
+  <rect x="58" y="388" width="262" height="78" rx="6" fill="#d9f0e1" stroke="#3f9c5a" stroke-width="1.8"/>
+  <text x="189" y="410" text-anchor="middle" font-size="13" fill="#1f6b3c" font-weight="700">nvfp4_scaled_mm (native)</text>
+  <text x="189" y="429" text-anchor="middle" font-size="11.5" fill="#1f6b3c">텐서코어가 FP4를 직접 계산</text>
+  <text x="189" y="449" text-anchor="middle" font-size="11.5" fill="#1f6b3c" font-weight="600">메모리 + 연산 이득</text>
+
+  <!-- marlin box -->
+  <rect x="480" y="388" width="262" height="78" rx="6" fill="#fde8d7" stroke="#d98a4a" stroke-width="1.8"/>
+  <text x="611" y="410" text-anchor="middle" font-size="13" fill="#9c4a13" font-weight="700">Marlin 폴백 (에뮬레이션)</text>
+  <text x="611" y="429" text-anchor="middle" font-size="11.5" fill="#9c4a13">4비트 저장 → FP16으로 펴서 계산</text>
+  <text x="611" y="449" text-anchor="middle" font-size="11.5" fill="#9c4a13" font-weight="600">메모리만 이득</text>
+
+  <!-- merge to forward -->
+  <line x1="189" y1="466" x2="189" y2="494" stroke="#555" stroke-width="1.6"/>
+  <line x1="611" y1="466" x2="611" y2="494" stroke="#555" stroke-width="1.6"/>
+  <line x1="189" y1="494" x2="611" y2="494" stroke="#555" stroke-width="1.6"/>
+  <line x1="400" y1="494" x2="400" y2="512" stroke="#555" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- forward box -->
+  <rect x="285" y="514" width="230" height="42" rx="6" fill="#e8eef7" stroke="#3b6db3" stroke-width="1.5"/>
+  <text x="400" y="540" text-anchor="middle" font-size="13" fill="#1f4e8c" font-weight="600">forward — 레이어마다 커널 호출</text>
+  <line x1="400" y1="556" x2="400" y2="572" stroke="#555" stroke-width="1.8" marker-end="url(#a)"/>
+
+  <!-- serving layer -->
+  <rect x="250" y="574" width="300" height="42" rx="6" fill="#f3e8f7" stroke="#8e44ad" stroke-width="1.5"/>
+  <text x="400" y="600" text-anchor="middle" font-size="12.5" fill="#6c3483" font-weight="600">PagedAttention · continuous batching</text>
+</svg>
