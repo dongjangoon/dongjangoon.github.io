@@ -7,7 +7,7 @@ tags: [sglang, llm-serving, gpu, inference, radix-attention, overlap-scheduling,
 excerpt: "SGLang을 공부하며 정리한 노트입니다. 구조화된 LLM 프로그램을 효율적으로 실행하기 위한 시스템으로, RadixAttention과 Overlap Scheduling이라는 두 축을 두고 있습니다. 논문에 따르면 vLLM 대비 최대 6.4배 높은 처리량을 보고했는데, 이 글에서는 NeurIPS 2024 논문을 따라가며 제가 이해한 만큼 설계 철학과 전체 아키텍처를 정리해 봤습니다."
 ---
 
-**🤖 이 글은 AI를 활용하여 작성되었습니다.**
+**이 글은 AI를 활용하여 작성되었습니다.**
 {: .notice--info}
 
 ## 들어가며

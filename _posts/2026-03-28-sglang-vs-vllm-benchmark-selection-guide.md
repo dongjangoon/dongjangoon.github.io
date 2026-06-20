@@ -7,7 +7,7 @@ tags: [sglang, vllm, benchmark, llm-serving, inference, comparison, h100, deepse
 excerpt: "SGLang과 vLLM 중 언제 뭘 쓰면 좋을지, 여러 곳에 공개된 벤치마크(PremAI·Clarifai·LMSYS·dstack 등)와 RTX 5070 Ti에서 직접 돌려본 작은 테스트를 모아 제가 본 만큼 정리한 메모입니다. 종합적인 결론이라기보다 공부하며 남기는 기록에 가깝습니다."
 ---
 
-**🤖 이 글은 AI를 활용하여 작성되었습니다.**
+**이 글은 AI를 활용하여 작성되었습니다.**
 {: .notice--info}
 
 > 이 글은 **SGLang v0.5.9** (2026년 2월)과 **vLLM v0.18.0** (2026년 3월) 기준으로 작성되었습니다. 자체 벤치마크는 RTX 5070 Ti + Mistral-7B-AWQ 환경에서 수행되었습니다.

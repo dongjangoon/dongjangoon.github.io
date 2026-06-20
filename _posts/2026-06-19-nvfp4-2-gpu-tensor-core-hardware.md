@@ -8,7 +8,7 @@ tags: [llm, quantization, nvfp4, fp4, gpu, tensor-core, blackwell, sm120, sm100,
 excerpt: "1편에서 만든 4비트 숫자를 GPU가 실제로 빠르게 곱하려면 전용 하드웨어가 필요합니다. CPU와 GPU의 차이, SM과 텐서코어가 무엇인지, 그리고 왜 NVFP4가 Blackwell 세대에서만 진짜 빠른지(native FP4 vs 에뮬레이션)를 처음 보는 사람도 이해할 수 있게 풀어봅니다."
 ---
 
-**🤖 이 글은 AI를 활용하여 작성되었습니다.**
+**이 글은 AI를 활용하여 작성되었습니다.**
 {: .notice--info}
 
 ## 들어가며

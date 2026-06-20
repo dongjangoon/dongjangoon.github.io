@@ -8,7 +8,7 @@ tags: [llm, quantization, nvfp4, fp4, fp8, floating-point, gpu, inference, black
 excerpt: "양자화의 가장 밑바닥인 '숫자'부터 다시 봅니다. 부동소수점이 무엇이고, 비트를 줄이면 왜 빨라지는지, 그리고 4비트가 망가지지 않게 NVFP4가 쓰는 트릭(two-level scaling)을 처음 보는 사람도 이해할 수 있게 풀어봅니다."
 ---
 
-**🤖 이 글은 AI를 활용하여 작성되었습니다.**
+**이 글은 AI를 활용하여 작성되었습니다.**
 {: .notice--info}
 
 ## 들어가며

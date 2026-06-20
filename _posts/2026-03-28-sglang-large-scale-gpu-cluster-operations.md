@@ -7,7 +7,7 @@ tags: [sglang, gpu-cluster, expert-parallelism, disaggregated-serving, hicache, 
 excerpt: "대규모 GPU 클러스터에서 DeepSeek V3 같은 모델을 서빙할 때 쓰이는 Expert Parallelism, PD Disaggregation, HiCache, Speculative Decoding을 공부하며 정리한 노트입니다. 직접 대규모 클러스터를 운영한 경험이라기보다 문서와 자료를 보며 이해한 내용이며, 본문의 성능 수치는 LMSYS 블로그와 SGLang 문서 등 출처에 근거한 값입니다."
 ---
 
-**🤖 이 글은 AI를 활용하여 작성되었습니다.**
+**이 글은 AI를 활용하여 작성되었습니다.**
 {: .notice--info}
 
 > 이 글은 **SGLang v0.5.9** (2026년 2월) 기준으로 작성되었습니다.

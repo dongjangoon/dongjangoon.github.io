@@ -8,7 +8,7 @@ tags: [llm, quantization, nvfp4, vllm, cuda, kernel, cutlass, marlin, flashinfer
 excerpt: "하드웨어가 native FP4를 계산할 수 있어도, 그걸 호출하는 '커널'이 없으면 소용이 없습니다. 커널이 무엇인지부터 vLLM이 양자화 가중치를 읽어 레이어마다 백엔드를 고르는 디스패치 체인, 그리고 native 커널이 없을 때의 Marlin 폴백까지 따라가 봅니다."
 ---
 
-**🤖 이 글은 AI를 활용하여 작성되었습니다.**
+**이 글은 AI를 활용하여 작성되었습니다.**
 {: .notice--info}
 
 > 이 글의 코드 경로·이슈 상태는 빠르게 바뀌는 영역이라 **현재 시점(2026년 6월) 기준**으로 정리했습니다. vLLM은 이 시점 기준 0.2x 버전대로 올라와 있으며([vLLM Releases](https://github.com/vllm-project/vllm/releases)), 세부 구현은 버전에 따라 달라질 수 있습니다.
