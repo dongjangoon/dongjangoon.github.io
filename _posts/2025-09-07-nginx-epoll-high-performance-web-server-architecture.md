@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Nginx와 epoll: 고성능 웹서버의 핵심 기술"
+title: "Nginx와 epoll: 고성능 웹서버가 동작하는 방식"
 date: 2025-09-07 12:00:00 +0000
 last_modified_at: 2025-09-14
 categories: development
