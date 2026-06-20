@@ -1,11 +1,14 @@
 ---
 layout: single
-title: "대규모 GPU 클러스터에서의 SGLang 운영 - EP, PD Disaggregation, HiCache, Speculative Decoding (SGLang 시리즈 Part 4)"
+title: "대규모 GPU 클러스터에서 SGLang 운영 - EP, PD, HiCache, Speculative Decoding 정리 (SGLang 시리즈 Part 4)"
 date: 2026-03-28 10:00:00 +0900
 categories: mlops
 tags: [sglang, gpu-cluster, expert-parallelism, disaggregated-serving, hicache, speculative-decoding, deepseek, llm-serving, h100]
-excerpt: "96대의 H100 GPU에서 DeepSeek V3를 서빙하려면 어떤 기술이 필요할까요? Expert Parallelism으로 MoE 모델을 분산하고, Prefill/Decode를 분리하여 독립적으로 스케일링하고, 계층형 KV 캐싱으로 GPU 메모리의 한계를 넘고, Speculative Decoding으로 생성 속도를 2배 높이는 프로덕션 수준의 최적화 기법들을 분석합니다."
+excerpt: "대규모 GPU 클러스터에서 DeepSeek V3 같은 모델을 서빙할 때 쓰이는 Expert Parallelism, PD Disaggregation, HiCache, Speculative Decoding을 공부하며 정리한 노트입니다. 직접 대규모 클러스터를 운영한 경험이라기보다 문서와 자료를 보며 이해한 내용이며, 본문의 성능 수치는 LMSYS 블로그와 SGLang 문서 등 출처에 근거한 값입니다."
 ---
+
+**🤖 이 글은 AI를 활용하여 작성되었습니다.**
+{: .notice--info}
 
 > 이 글은 **SGLang v0.5.9** (2026년 2월) 기준으로 작성되었습니다.
 
@@ -27,11 +30,11 @@ DeepSeek V3: 671B 파라미터, 256개 전문가(expert), MoE 아키텍처
 → 생성 속도(TPOT)를 더 낮춰야 하는 요구
 ```
 
-이 글에서는 SGLang이 대규모 GPU 클러스터에서 LLM을 운영하기 위해 제공하는 네 가지 핵심 기술을 분석합니다.
+이 글에서는 SGLang이 대규모 GPU 클러스터에서 LLM을 운영하기 위해 제공하는 네 가지 기술을, 문서와 자료를 보며 제가 이해한 만큼 정리해보려 합니다. 직접 수백 대 규모의 클러스터를 굴려본 경험이라기보다, 공부하면서 남긴 노트에 가깝습니다.
 
 ## 병렬화 전략 총정리
 
-구체적인 기술을 다루기 전에, SGLang이 지원하는 병렬화 전략의 전체 그림을 먼저 정리하겠습니다.
+구체적인 기술을 다루기 전에, SGLang이 지원하는 병렬화 전략의 전체 그림을 제가 이해한 만큼 먼저 정리해보겠습니다.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -68,7 +71,7 @@ DeepSeek V3: 671B 파라미터, 256개 전문가(expert), MoE 아키텍처
 | DeepSeek V3 (671B MoE) | H100 x 16 | `tp=8, ep=8` | 전문가 분산 |
 | DeepSeek V3 | H100 x 96 | `tp=8, ep=8, dp=12` + PD 분리 | 프로덕션 규모 |
 
-이제 각 기술을 깊이 살펴보겠습니다.
+이제 각 기술을 하나씩 살펴보겠습니다.
 
 ## Expert Parallelism: MoE 모델의 분산 서빙
 
@@ -213,7 +216,7 @@ python -m sglang.launch_server \
 
 ### 왜 분리하는가
 
-[이전 포스트]({{ site.baseurl }}{% post_url 2025-01-11-llm-inference-memory-bound %})에서 다뤘듯이, Prefill과 Decode는 근본적으로 다른 연산 특성을 가집니다.
+[이전 포스트]({{ site.baseurl }}{% post_url 2026-01-11-llm-inference-memory-bound %})에서 다뤘듯이, Prefill과 Decode는 근본적으로 다른 연산 특성을 가집니다.
 
 ```
 Prefill (프롬프트 처리):
@@ -644,7 +647,7 @@ FP8 Attention + NVFP4 MoE 조합으로, GPU당 26,156 입력 토큰/초, 13,386 
 
 ## 기술들의 결합
 
-이 글에서 다룬 네 가지 기술은 독립적이 아니라 **상호 보완적으로 결합**됩니다.
+제가 이해하기로, 이 글에서 다룬 네 가지 기술은 독립적이 아니라 **상호 보완적으로 결합** 되는 쪽에 가깝습니다.
 
 ```
 프로덕션 DeepSeek V3 배포:
@@ -682,14 +685,14 @@ FP8 Attention + NVFP4 MoE 조합으로, GPU당 26,156 입력 토큰/초, 13,386 
 
 ## 마무리
 
-이 글에서는 SGLang을 대규모 GPU 클러스터에서 운영하기 위한 네 가지 핵심 기술을 분석했습니다.
+이 글에서는 SGLang을 대규모 GPU 클러스터에서 운영하기 위한 네 가지 기술을, 자료와 문서를 보며 공부한 만큼 정리해봤습니다.
 
 - **Expert Parallelism**은 MoE 모델의 전문가를 GPU 간에 분배하고, DeepEP와 EPLB로 통신과 부하를 최적화합니다.
 - **PD Disaggregation**은 Prefill과 Decode를 물리적으로 분리하여 상호 간섭을 제거하고 독립적 스케일링을 가능하게 합니다.
 - **HiCache**는 KV cache를 GPU → CPU → 분산 스토리지로 확장하여, 최대 6x 처리량 향상과 80% TTFT 감소를 달성합니다.
 - **Speculative Decoding**은 draft 모델의 추측 + target 모델의 검증으로 Decode 속도를 최대 2x 향상시킵니다.
 
-이 기술들은 개별적으로도 강력하지만, 결합할 때 진정한 프로덕션 수준의 성능을 달성합니다. 96대의 H100에서 DeepSeek V3를 노드당 52.3k 입력 토큰/초로 서빙한 사례가 이를 증명합니다.
+이 기술들은 개별적으로도 의미가 있지만, 결합할 때 프로덕션 수준의 성능에 다가가는 것으로 보입니다. LMSYS가 공개한 96대의 H100에서 DeepSeek V3를 노드당 52.3k 입력 토큰/초로 서빙한 사례가 그 단면을 보여주는 것 같습니다.
 
 다음 **Part 5** (시리즈 마지막)에서는 SGLang과 vLLM의 **종합 벤치마크 비교**와 **시나리오별 선택 가이드**를 다루겠습니다. 프레임워크 선택의 의사결정 기준부터 Kubernetes 배포, 모니터링, 장애 대응까지 프로덕션 운영 관점에서 정리합니다.
 
