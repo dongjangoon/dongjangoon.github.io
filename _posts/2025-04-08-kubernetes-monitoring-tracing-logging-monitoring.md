@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "쿠버네티스 모니터링 완벽 가이드: 트레이싱, 로깅, 메트릭"
+title: "쿠버네티스 모니터링 정리: 트레이싱, 로깅, 메트릭"
 date: 2025-04-08 09:47:00 +0000
 last_modified_at: 2026-02-18
 categories: monitoring

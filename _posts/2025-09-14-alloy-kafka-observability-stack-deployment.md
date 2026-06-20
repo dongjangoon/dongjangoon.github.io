@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "완전한 관측성 스택 구축: Prometheus, Grafana, Loki, Alloy 통합 [Claude Code 오픈소스 기여 도전기 #3]"
+title: "관측성 스택 구축기: Prometheus, Grafana, Loki, Alloy 통합 [Claude Code 오픈소스 기여 도전기 #3]"
 date: 2025-09-14 14:00:00 +0900
 categories: monitoring
 tags: [prometheus, grafana, loki, alloy, kafka, monitoring, observability]

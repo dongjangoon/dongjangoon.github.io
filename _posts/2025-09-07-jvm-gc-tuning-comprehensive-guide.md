@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "JVM 설정과 GC 튜닝: 실무 가이드"
+title: "JVM 설정과 GC 튜닝 정리"
 date: 2025-09-07 13:00:00 +0000
 last_modified_at: 2025-09-14
 categories: development

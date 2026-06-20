@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "CORS(Cross-Origin Resource Sharing)와 리버스 프록시: 웹 보안의 진화"
+title: "CORS(Cross-Origin Resource Sharing)와 리버스 프록시 정리"
 date: 2025-09-07 10:00:00 +0000
 last_modified_at: 2025-09-14
 categories: development

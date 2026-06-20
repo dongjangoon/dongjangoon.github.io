@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Apache Kafka 아키텍처 분석: 디스크 기반 로그 구조와 메시지 브로커의 설계 철학"
+title: "Apache Kafka 아키텍처 뜯어보기: 디스크 기반 로그 구조와 메시지 브로커 설계"
 date: 2025-09-07 14:00:00 +0000
 last_modified_at: 2025-09-14
 categories: monitoring
