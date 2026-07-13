@@ -6,6 +6,7 @@ last_modified_at: 2026-06-20
 categories: [ai, infrastructure]
 tags: [llm, quantization, nvfp4, vllm, benchmark, rtx5070ti, sm120, mmlu, throughput, fp8, model-runner-v2]
 excerpt: "1~3편에서 정리한 이론을, 손에 있는 16GB RTX 5070 Ti에 직접 올려서 확인해 본 기록입니다. BF16로는 안 올라가던 모델이 NVFP4로는 올라가는지, 디스패치가 native FP4를 골랐는지, 속도와 정확도는 어떤지를 터미널에 찍힌 로그 그대로 옮겨 봤습니다. 전문 벤치마크라기보다, 공부하면서 돌려본 메모에 가깝습니다."
+published: false
 ---
 
 **이 글은 AI를 활용하여 작성되었습니다.**
