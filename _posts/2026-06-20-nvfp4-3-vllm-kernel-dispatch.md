@@ -6,6 +6,7 @@ last_modified_at: 2026-06-20
 categories: [ai, infrastructure]
 tags: [llm, quantization, nvfp4, vllm, cuda, kernel, cutlass, marlin, flashinfer, compressed-tensors, moe, sm120]
 excerpt: "하드웨어가 native FP4를 계산할 수 있어도, 그걸 호출하는 '커널'이 없으면 소용이 없습니다. 커널이 무엇인지부터 vLLM이 양자화 가중치를 읽어 레이어마다 백엔드를 고르는 디스패치 체인, 그리고 native 커널이 없을 때의 Marlin 폴백까지 따라가 봅니다."
+published: false
 ---
 
 **이 글은 AI를 활용하여 작성되었습니다.**
