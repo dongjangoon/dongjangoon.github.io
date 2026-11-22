@@ -5,6 +5,7 @@ date: 2026-03-28 10:00:00 +0900
 categories: mlops
 tags: [sglang, gpu-cluster, expert-parallelism, disaggregated-serving, hicache, speculative-decoding, deepseek, llm-serving, h100]
 excerpt: "대규모 GPU 클러스터에서 DeepSeek V3 같은 모델을 서빙할 때 쓰이는 Expert Parallelism, PD Disaggregation, HiCache, Speculative Decoding을 공부하며 정리한 노트입니다. 직접 대규모 클러스터를 운영한 경험이라기보다 문서와 자료를 보며 이해한 내용이며, 본문의 성능 수치는 LMSYS 블로그와 SGLang 문서 등 출처에 근거한 값입니다."
+published: false
 ---
 
 **이 글은 AI를 활용하여 작성되었습니다.**

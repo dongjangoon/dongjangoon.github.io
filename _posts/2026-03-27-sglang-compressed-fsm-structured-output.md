@@ -5,6 +5,7 @@ date: 2026-03-27 14:00:00 +0900
 categories: mlops
 tags: [sglang, vllm, structured-output, constrained-decoding, json-schema, xgrammar, fsm, llm-serving]
 excerpt: "LLM이 늘 올바른 JSON을 내놓게 하려면 어떻게 해야 할까요. SGLang의 Compressed FSM을 공부하며 정리한 노트입니다. Jump-forward로 결정론적 토큰을 건너뛰는 방식과 XGrammar의 문법 검증을 제가 이해한 만큼 따라가 봤고, 성능 수치는 논문과 벤치마크에서 인용했습니다."
+published: false
 ---
 
 **이 글은 AI를 활용하여 작성되었습니다.**
