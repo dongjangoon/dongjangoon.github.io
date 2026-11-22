@@ -5,6 +5,7 @@ date: 2026-03-27 10:00:00 +0900
 categories: mlops
 tags: [sglang, vllm, radix-attention, paged-attention, kv-cache, prefix-caching, llm-serving, inference]
 excerpt: "SGLang의 RadixAttention과 vLLM의 PagedAttention은 KV cache 관리라는 같은 문제를 서로 다른 자료구조(Radix Tree vs Hash Table)로 풀어갑니다. 두 접근법의 구조를 공부하며 정리해 봤고, Cache-Aware Scheduling과 Eviction 전략까지 제가 이해한 만큼 비교해 봅니다. 본문의 성능 수치는 SGLang 논문과 공개 벤치마크에서 인용한 값입니다."
+published: false
 ---
 
 **이 글은 AI를 활용하여 작성되었습니다.**
