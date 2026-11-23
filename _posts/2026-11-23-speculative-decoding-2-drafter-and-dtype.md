@@ -38,7 +38,7 @@ DFlash를 기준으로 그리면 아래와 같습니다.
 
 ![드래프터가 타깃의 다섯 층에서 hidden state를 받아 fc 층으로 줄인 뒤 토큰을 제안하는 구조](/assets/images/posts/specdec/fig6_drafter_tap.png)
 
-타깃인 Qwen3-8B는 36개 층이고 층마다 4,096칸짜리 hidden state를 내놓습니다. DFlash 드래프터는 이 중 다섯 층(`config.json`의 `aux_hidden_state_layer_ids`가 1, 9, 17, 25, 33)의 hidden state를 옆으로 이어 붙여 20,480칸으로 만들고, `fc` 층 하나로 다시 4,096칸으로 줄입니다. 이 값을 정규화해서 드래프터의 모든 층이 참조하는 K/V로 넣어 두고, 드래프터는 그걸 보면서 다음 토큰들을 제안합니다.
+타깃인 Qwen3-8B는 36개 층이고 층마다 4,096칸짜리 hidden state를 내놓습니다. hidden state는 모델이 토큰마다, 층마다 들고 있는 중간 계산 결과 벡터입니다. DFlash 드래프터는 이 중 다섯 층(`config.json`의 `aux_hidden_state_layer_ids`가 1, 9, 17, 25, 33)의 hidden state를 옆으로 이어 붙여 20,480칸으로 만들고, `fc` 층 하나로 다시 4,096칸으로 줄입니다. `fc`는 fully connected의 줄임말로, 가중치 행렬을 한 번 곱해서 벡터의 크기를 바꾸는 가장 기본적인 층입니다. 이 값을 정규화해서 드래프터의 모든 층이 참조하는 K/V로 넣어 두고, 드래프터는 그걸 보면서 다음 토큰들을 제안합니다.
 
 여러 층을 받는 이유는 층마다 담긴 정보가 다르다고 알려져 있기 때문입니다. 그리고 타깃은 검증을 하느라 어차피 모든 층을 계산하므로, 드래프터 입장에서는 이미 계산된 값을 빌려 쓰기만 하면 됩니다. 반면 모든 층을 다 받으면 `fc`가 그만큼 커지기 때문에 간격을 두고 몇 개만 고릅니다.
 
@@ -57,7 +57,7 @@ DFlash를 기준으로 그리면 아래와 같습니다.
 | dtype | bfloat16 | bfloat16 | bfloat16 |
 
 - **EAGLE-3** 는 층이 하나뿐인 드래프터가 토큰을 하나씩 이어서 제안합니다. 출력 어휘를 전체 151,936개가 아니라 32,000개로 줄여 둔 것이 특징입니다
-- **DFlash** 는 제안할 자리를 마스크 토큰으로 채워 두고 forward 한 번으로 전부 채웁니다. 자기 임베딩과 출력 헤드가 없어서 타깃 없이는 아무것도 쓰지 못합니다
+- **DFlash** 는 제안할 자리를 마스크 토큰(아직 비어 있어서 채워야 할 자리라는 뜻의 특수 토큰)으로 채워 두고 forward 한 번으로 전부 채웁니다. 자기 임베딩과 출력 헤드가 없어서 타깃 없이는 아무것도 쓰지 못합니다
 - **DSpark** 는 DFlash와 같은 병렬 구조 뒤에 작은 헤드가 두 개 더 붙습니다. 하나는 앞 토큰을 보고 다음 위치를 보정하고, 다른 하나는 어디까지 검증에 보낼지를 정합니다
 
 EAGLE-3는 vLLM에서 쓴 체크포인트 기준이고, DFlash2는 층 수와 파라미터 수를 확인하지 못해서 표에 넣지 않았습니다.
@@ -102,7 +102,7 @@ float16은 값이 65,504를 넘으면 `inf`가 되고, bfloat16은 그럴 일이
 SGLang은 타깃용 설정과 드래프터용 설정을 같은 함수로 만들고, `--dtype` 값도 둘에 똑같이 넘깁니다. 문제는 기본값 `auto`를 해석하는 부분입니다.
 
 ```python
-# srt/configs/model_config.py:2284-2321  (_get_and_verify_dtype)
+# srt/configs/model_config.py  (_get_and_verify_dtype)
         config_dtype = config.get("dtype", None) or config.get("torch_dtype", None)
     ...
         if dtype == "auto":
@@ -119,7 +119,7 @@ SGLang은 타깃용 설정과 드래프터용 설정을 같은 함수로 만들�
 첫 요청이 들어오면 타깃의 hidden state를 드래프터의 `fc` 층에 넣습니다. 그 직전 코드를 보면 장치와 정수 dtype은 맞추는데 실수 dtype은 건드리지 않습니다.
 
 ```python
-# srt/speculative/dflash_worker_v2.py:1899-1929
+# srt/speculative/dflash_worker_v2.py
         if target_hidden.device != device:
             target_hidden = target_hidden.to(device, non_blocking=True)   # 장치만 맞춤
         if cache_loc.dtype != torch.int64:
@@ -127,7 +127,7 @@ SGLang은 타깃용 설정과 드래프터용 설정을 같은 함수로 만들�
         ...
             ctx_hidden = self.draft_model.project_target_hidden(target_hidden)   # float16 그대로 전달
 
-# srt/models/dflash.py:842
+# srt/models/dflash.py
         projected = self.fc(target_hidden)     # fc의 가중치는 bfloat16, 입력은 float16
 ```
 
@@ -144,12 +144,12 @@ RuntimeError: expected mat1 and mat2 to have the same dtype, but got: c10::Half 
 EAGLE-3 드래프터는 메모리를 아끼려고 타깃의 임베딩 테이블을 복사하지 않고 그대로 가리킵니다.
 
 ```python
-# srt/models/llama.py:910-918  (set_embed)
+# srt/models/llama.py  (set_embed)
         del self.model.embed_tokens.weight
         self.model.embed_tokens.weight = embed      # 타깃의 float16 임베딩을 참조로 연결
 ```
 
-해서 드래프터가 토큰을 임베딩하면 float16이 나오고, 바로 다음에 bfloat16 가중치를 가진 정규화 층으로 들어갑니다. 이번에는 PyTorch가 아니라 GPU 커널(RMSNorm) 쪽에서 거부합니다. 서버가 기동하면서 드래프터를 미리 한 번 돌려 보는 단계(CUDA graph 캡처)에서 생기는 일이라, 요청을 받기도 전에 죽게 됩니다.
+해서 드래프터가 토큰을 임베딩하면 float16이 나오고, 바로 다음에 bfloat16 가중치를 가진 정규화 층으로 들어갑니다. 이번에는 PyTorch의 기본 연산이 아니라, SGLang이 직접 호출하는 FlashInfer 라이브러리의 RMSNorm 커널이 입력 dtype을 검사하다가 거부합니다. 해서 에러의 종류와 문구도 DFlash 때와 다릅니다. 그리고 서버가 기동하면서 드래프터를 미리 한 번 돌려 보는 단계(CUDA graph 캡처)에서 생기는 일이라, 요청을 받기도 전에 죽게 됩니다.
 
 정리하면 SGLang에서는 `--dtype bfloat16`을 주는 순간 `auto`가 아니게 되어 두 모델이 같은 값을 받고, 그래서 문제가 사라집니다.
 
@@ -158,7 +158,7 @@ EAGLE-3 드래프터는 메모리를 아끼려고 타깃의 임베딩 테이블�
 vLLM은 SGLang과 반대로 동작합니다. 드래프터 설정을 만들 때 타깃의 dtype을 그대로 넘기고, 체크포인트의 dtype과 다르면 경고 한 줄을 남기고 가중치를 변환합니다.
 
 ```python
-# vllm/config/model.py:2558-2560
+# vllm/config/model.py
         else:
             # Casting between float16 and bfloat16 is allowed with a warning.
             logger.warning("Casting %s to %s.", config_dtype, torch_dtype)
@@ -173,10 +173,10 @@ vLLM은 SGLang과 반대로 동작합니다. 드래프터 설정을 만들 때 �
 타깃의 다섯 층을 이어 붙인 20,480칸을 `fc` 층에 넣고, 그 결과를 정규화하기 전 상태로 float16 버퍼에 저장합니다.
 
 ```python
-# vllm/model_executor/models/qwen3_dflash.py:975-976  (combine_hidden_states)
+# vllm/model_executor/models/qwen3_dflash.py  (combine_hidden_states)
         result = self.model.fc(hidden_states.to(self.model.fc.params_dtype))
 
-# vllm/v1/worker/gpu/spec_decode/dflash/speculator.py:54-56, :443
+# vllm/v1/worker/gpu/spec_decode/dflash/speculator.py
         self.hidden_states = torch.zeros(
             self.max_num_tokens, self.hidden_size, dtype=self.dtype, device=device   # float16
         )
@@ -191,7 +191,7 @@ vLLM은 SGLang과 반대로 동작합니다. 드래프터 설정을 만들 때 �
 저장해 둔 값은 정규화(RMSNorm)를 거쳐 드래프터의 K/V가 됩니다. RMSNorm은 각 값에 `1/√(제곱 평균)`을 곱하는 계산입니다.
 
 ```cpp
-// csrc/layernorm_kernels.cu:70-73, :90-93
+// csrc/layernorm_kernels.cu
     s_variance = rsqrtf(variance / hidden_size + epsilon);
     ...
         dst.val[j] = static_cast<scalar_t>(x * s_variance * w);
@@ -206,7 +206,7 @@ vLLM은 SGLang과 반대로 동작합니다. 드래프터 설정을 만들 때 �
 5. 드래프트 토큰을 고르는 함수는 NaN을 -∞로 바꾼 뒤 가장 큰 것을 고르는데, 전부 -∞면 0번 토큰이 나옵니다
 
 ```python
-# vllm/v1/worker/gpu/sample/greedy_argmax.py:42-49
+# vllm/v1/worker/gpu/sample/greedy_argmax.py
         return logits.masked_fill(logits.isnan(), float("-inf")).argmax(dim=-1)
 ```
 
@@ -232,20 +232,7 @@ DFLASH_PROBE draft call=2 num_reqs=1 all_zero=True tokens_req0=[0, 0, 0, 0, 0, 0
 
 위 로그는 길어서 일부 필드를 생략했습니다. `fc` 출력이 넘치는 것과 드래프트가 전부 0번 토큰이 되는 것은 로그로 확인했고, 그 사이(정규화에서 NaN이 생겨 K/V로 퍼지는 부분)는 코드로만 확인했습니다.
 
-로그를 보면서 알게 된 점도 있습니다. 넘치는 것은 프롬프트 전체가 아니라 토큰 하나였고, 프롬프트 길이가 다른 세 요청에서 그 행의 값이 똑같았습니다. 모든 요청에 공통으로 들어가는 토큰이라는 뜻이고, 채팅 템플릿의 첫 토큰일 것으로 보입니다. LLM의 시작 토큰에서 hidden state의 몇 칸이 유난히 커지는 현상은 논문으로도 알려져 있습니다. 다만 몇 번째 토큰인지는 로그에 찍지 않아서 확인하지 못했습니다.
-
-### DSpark는 왜 멀쩡한가
-
-vLLM에서 DSpark는 DFlash의 모델과 실행기를 상속하기 때문에 위의 과정을 똑같이 지나갑니다. 그런데 float16에서도 수용 길이 3.39로 정상이었습니다.
-
-차이가 나는 곳은 체크포인트의 가중치 크기였습니다.
-
-| | DFlash | DSpark |
-|---|---|---|
-| `fc.weight`의 rms | 0.190 | 0.067 |
-| `fc.weight`의 최대 절댓값 | 6.56 | 1.45 |
-
-DSpark의 `fc`가 값을 덜 키워서 한계를 넘지 않는 것으로 보입니다. 다만 DSpark의 `fc` 출력을 직접 재지는 않았기 때문에 이것만으로 충분한 설명인지는 확인하지 못했습니다.
+로그를 보면서 알게 된 점도 있습니다. 넘치는 것은 프롬프트 전체가 아니라 토큰 하나였고, 프롬프트 길이가 다른 세 요청에서 그 행의 값이 똑같았습니다. 모든 요청에 공통으로 들어가는 토큰이라는 뜻이고, 채팅 템플릿의 첫 토큰일 것으로 보입니다.
 
 ### v0.34.0에서도 그대로
 
@@ -301,14 +288,6 @@ bfloat16은 정밀도가 낮아서 1등과 2등 토큰이 뒤집히는 자리가
 4. baseline과 속도를 비교하고, specdec을 켠 쪽이 느리면 수용 길이부터 확인합니다
 
 특히 3번은 오류 로그와 응답만으로는 보이지 않는 문제라, 수용 길이가 1.00에 붙어 있을 때 알람이 울리도록 해 두는 게 좋습니다.
-
-## 한계
-
-- 릴리스 이미지(vLLM v0.33.0과 v0.34.0, SGLang v0.5.23)에서만 확인했고, 두 엔진의 최신 `main`에서도 같은지는 확인하지 못했습니다
-- 넘치는 토큰이 몇 번째인지, DSpark가 같은 조건에서 왜 넘치지 않는지는 확인하지 못했습니다
-- DFlash2도 float16에서 수용률이 0이었지만(5,439개 제안에 0개), 어디서 넘치는지는 따라가 보지 않았습니다
-- SGLang의 EAGLE-3는 기동 중에 죽는 것만 확인했습니다. 기동을 넘기더라도 요청 처리 중에 같은 문제가 생길 것으로 보이지만 실행해 보지는 않았습니다
-- 양자화, dtype, specdec을 한자리에 묶어 설명한 공식 문서는 찾지 못했습니다. 비슷한 보고는 vLLM 이슈 #55250과 #61072에 있습니다
 
 ## 레퍼런스
 
