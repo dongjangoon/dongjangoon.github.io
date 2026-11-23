@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "KV 캐시 라우팅 실험하기 (2) Go 프록시와 llm-d"
-date: 2026-11-21 11:00:00 +0900
+date: 2026-11-23 22:00:00 +0900
 categories: mlops
 tags: [vllm, llm-d, kv-cache, prefix-caching, routing, llm-serving, inference, kubernetes, k3s, go]
 excerpt: "1편에서 만든 Go 프록시를 k3s로 옮겨 llm-d의 근사, 정밀 스코어러와 같은 부하로 비교해보았습니다. 평상시의 캐시 적중률은 셋이 거의 같았고, 차이는 라우터를 재시작하거나 파드 수를 바꿨을 때 나타났습니다."
