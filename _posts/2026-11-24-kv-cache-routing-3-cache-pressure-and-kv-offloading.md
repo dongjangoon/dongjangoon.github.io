@@ -70,6 +70,8 @@ excerpt: "GPU의 KV 캐시를 일부러 줄여서 프리픽스가 밀려나는 �
 
 KV 오프로딩은 GPU 캐시에서 밀려나는 블록을 버리지 않고 CPU 메모리로 옮겨 두는 기능입니다. 나중에 같은 프리픽스가 다시 오면 처음부터 계산하는 대신 CPU 메모리에서 GPU로 다시 불러옵니다. GPU 메모리보다 훨씬 넉넉한 호스트 메모리를 캐시의 두 번째 계층으로 쓰는 셈입니다.
 
+![KV 오프로딩 - GPU KV 캐시에서 밀려나는 블록을 CPU 메모리 계층으로 복사하고, 같은 프리픽스가 다시 오면 GPU로 다시 불러온다](/assets/images/posts/kv-routing/kv-offloading.png)
+
 vLLM에서는 위 구성 표의 옵션 두 개로 켤 수 있었습니다. `--kv-offloading-backend=native`로 기능을 켜고 `--kv-offloading-size=1`로 CPU 계층의 크기를 GB 단위로 정하는데, 여기서는 파드당 1GB를 주었습니다. A와 같은 순서로 부하를 보낸 결과입니다.
 
 | 정책 | 32종 다시 보냄 (A → B) | 다시 보낼 때 첫 턴 (A → B) | CPU 계층에서 불러온 토큰 |
