@@ -113,7 +113,12 @@ SGLang은 타깃용 설정과 드래프터용 설정을 같은 함수로 만들�
                 torch_dtype = config_dtype      # 그 모델의 config.json 값을 그대로
 ```
 
-"그 모델의 `config.json`에 적힌 값을 쓴다"가 규칙이라 모델마다 답이 달라집니다. 타깃은 float16, 드래프터는 bfloat16으로 올라가고, 기동 로그에도 `KV Cache is allocated. dtype: torch.float16`과 `dtype: torch.bfloat16`이 한 서버에 같이 찍힙니다.
+"그 모델의 `config.json`에 적힌 값을 쓴다"가 규칙이라 모델마다 답이 달라집니다. 타깃은 float16, 드래프터는 bfloat16으로 올라가고, 기동 로그에도 한 서버에 dtype이 두 개 찍힙니다. 위가 타깃, 아래가 드래프터의 KV 캐시입니다.
+
+```
+KV Cache is allocated. dtype: torch.float16, #tokens: 20300, K size: 1.39 GB, V size: 1.39 GB
+KV Cache is allocated. dtype: torch.bfloat16, #tokens: 20300, K size: 0.19 GB, V size: 0.19 GB
+```
 
 ### DFlash
 
@@ -151,6 +156,14 @@ EAGLE-3 드래프터는 메모리를 아끼려고 타깃의 임베딩 테이블�
 ```
 
 해서 드래프터가 토큰을 임베딩하면 float16이 나오고, 바로 다음에 bfloat16 가중치를 가진 정규화 층으로 들어갑니다. 이번에는 PyTorch의 기본 연산이 아니라, SGLang이 직접 호출하는 FlashInfer 라이브러리의 RMSNorm 커널이 입력 dtype을 검사하다가 거부합니다. 해서 에러의 종류와 문구도 DFlash 때와 다릅니다. 그리고 서버가 기동하면서 드래프터를 미리 한 번 돌려 보는 단계(CUDA graph 캡처)에서 생기는 일이라, 요청을 받기도 전에 죽게 됩니다.
+
+트레이스백도 SGLang의 정규화 층(`layernorm.py`)에서 FlashInfer의 커널 쪽(`rmsnorm.py`)으로 넘어간 뒤에 끝납니다.
+
+```
+  File ".../sglang/srt/layers/layernorm.py", line 631, in forward_cuda
+  File ".../flashinfer/norm/kernels/rmsnorm.py", line 1360, in rmsnorm_cute
+ValueError: Mismatched Tensor on argument #1 ... expected dtype=float16
+```
 
 정리하면 SGLang에서는 `--dtype bfloat16`을 주는 순간 `auto`가 아니게 되어 두 모델이 같은 값을 받고, 그래서 문제가 사라집니다.
 
@@ -212,6 +225,18 @@ vLLM은 SGLang과 반대로 동작합니다. 드래프터 설정을 만들 때 �
 ```
 
 타깃은 0번 토큰을 매번 틀렸다고 판정합니다. 해서 수용률이 "낮은" 것이 아니라 모든 위치에서 정확히 0이고, 출력은 타깃이 정하기 때문에 응답은 정상이며, 속도만 드래프트와 검증 비용만큼 느려집니다. 지난 글에서 본 증상과 전부 맞습니다.
+
+서버 로그의 수용 통계를 보면 차이가 바로 드러납니다. 위는 float16 타깃, 아래는 bfloat16 타깃으로 돌렸을 때의 한 줄입니다.
+
+```
+# 타깃 float16
+SpecDecoding metrics: Mean acceptance length: 1.00, Accepted: 0 tokens, Drafted: 2863 tokens,
+  Per-position acceptance rate: 0.000, 0.000, 0.000, 0.000, 0.000, 0.000, 0.000
+
+# 타깃 bfloat16
+SpecDecoding metrics: Mean acceptance length: 2.52, Accepted: 64 tokens, Drafted: 294 tokens,
+  Per-position acceptance rate: 0.524, 0.357, 0.238, 0.190, 0.143, 0.048, 0.024
+```
 
 ### 로그를 넣어서 확인
 
