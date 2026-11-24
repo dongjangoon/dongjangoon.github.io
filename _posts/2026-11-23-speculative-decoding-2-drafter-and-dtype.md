@@ -25,8 +25,9 @@ excerpt: "지난 글에서 specdec을 켰는데 오류 없이 느려졌던 문�
 - SGLang은 타깃과 드래프터를 서로 다른 dtype으로 올려서, 드래프터의 `fc`가 타깃의 hidden state를 곱할 때 죽습니다
 - vLLM은 드래프터를 타깃의 dtype(float16)으로 바꿔서 올리는데, 드래프터의 계산값이 float16 범위를 넘어 NaN이 되고 모든 드래프트가 기각됩니다
 - 해서 "두 모델의 dtype을 같게"가 아니라 "두 모델이 모두 안전하게 돌 수 있는 dtype으로 같게" 맞춰야 합니다
+- 이 내용을 vLLM 이슈에 남겼고, 드래프터만 bfloat16으로 돌리는 수정 PR을 5070 Ti에서 확인해보았습니다
 
-대상은 vLLM v0.33.0과 v0.34.0, SGLang v0.5.23이고, 타깃은 `Qwen/Qwen3-8B-AWQ`입니다. 코드 인용의 줄 번호도 이 버전 기준입니다.
+대상은 vLLM v0.33.0과 v0.34.0, SGLang v0.5.23이고, 타깃은 `Qwen/Qwen3-8B-AWQ`입니다. 코드 인용도 이 버전 기준입니다.
 
 ## 드래프터 구조
 
@@ -236,7 +237,7 @@ DFLASH_PROBE draft call=2 num_reqs=1 all_zero=True tokens_req0=[0, 0, 0, 0, 0, 0
 
 ### v0.34.0에서도 그대로
 
-v0.34.0에는 `fc` 입력을 `fc`의 dtype으로 맞추는 변환이 한 줄 추가되어 있습니다(위 코드의 `.to(self.model.fc.params_dtype)`). 하지만 이건 타깃이 float32로 도는 경우를 위한 것이고, 타깃이 float16이면 이미 같은 dtype이라 아무 일도 하지 않습니다. 실제로 v0.34.0에서도 2,646개를 제안해서 0개가 받아들여졌습니다.
+v0.34.0에는 `fc` 입력을 `fc`의 dtype으로 맞추는 변환이 한 줄 추가되어 있습니다(위 코드의 `.to(self.model.fc.params_dtype)`). 하지만 이건 타깃이 float32로 도는 경우를 위한 것이고, 타깃이 float16이면 이미 같은 dtype이라 아무 일도 하지 않습니다. 실제로 v0.34.0에서도 2,646개를 제안해서 0개가 받아들여졌습니다. 글을 쓴 뒤에 `main`의 11월 22일 nightly 빌드로도 돌려보았는데 결과는 같았습니다.
 
 ## dtype을 같게 맞추면 되는 것 아닌가
 
@@ -278,6 +279,18 @@ bfloat16은 정밀도가 낮아서 1등과 2등 토큰이 뒤집히는 자리가
 
 해서 선택지는 두 가지입니다. bfloat16으로 모든 방식을 쓰거나, float16을 유지하면서 float16에서 동작하는 방식(vLLM의 DSpark, EAGLE-3)만 쓰는 것입니다.
 
+### 이후: vLLM에 올라온 수정
+
+이 내용을 vLLM 이슈 #55250에 댓글로 남겼습니다. 같은 문제를 다루는 PR #68620이 마침 올라와 있었는데, `--speculative-config`에 `"dtype": "bfloat16"`을 넣어서 타깃은 float16으로 두고 드래프터만 bfloat16으로 돌리는 수정입니다. 작성자가 CUDA 장비가 없다고 적어 두어서, 5070 Ti에서 같은 조합으로 돌려보았습니다.
+
+| 빌드 | 설정 | 수용 길이 | 출력 |
+|---|---|---|---|
+| nightly | 옵션 없음 | 1.00 | 기준 |
+| nightly + PR | `"dtype": "bfloat16"` | 3.93 | 기준과 같음 |
+| nightly | `--dtype bfloat16` | 3.96 | 3건 중 1건 다름 |
+
+요청 3건으로 본 결과입니다. 최신 `main`에서도 문제가 그대로였고, PR의 옵션을 주면 수용 길이가 돌아오면서 타깃의 출력은 바뀌지 않았습니다. 이 결과는 PR 본문에 반영됐습니다. 다만 PR은 아직 머지 전이라, 머지되기 전까지는 위의 두 선택지가 유효합니다.
+
 ## 배포 전에 확인할 것
 
 이번 일을 겪고 나서 specdec을 올리기 전에 확인하게 된 것들입니다.
@@ -301,7 +314,7 @@ GPU를 충분히 확보해서 서버당 동시 요청을 낮게 유지할 수 �
 
 - [vLLM Speculative Decoding 문서](https://docs.vllm.ai/en/latest/features/speculative_decoding/)
 - [SGLang Speculative Decoding 문서](https://docs.sglang.io/docs/advanced_features/speculative_decoding.md)
-- [vLLM 이슈 #55250](https://github.com/vllm-project/vllm/issues/55250)
+- [vLLM 이슈 #55250](https://github.com/vllm-project/vllm/issues/55250), [남긴 댓글](https://github.com/vllm-project/vllm/issues/55250#issuecomment-7094689516)
+- [vLLM PR #68620](https://github.com/vllm-project/vllm/pull/68620)
 - [vLLM 이슈 #61072](https://github.com/vllm-project/vllm/issues/61072)
 - [DFlash 논문](https://arxiv.org/abs/2602.06036)
-- [Massive Activations in Large Language Models](https://arxiv.org/abs/2402.17762)
