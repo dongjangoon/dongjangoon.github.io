@@ -126,6 +126,13 @@ llm-d의 프리픽스 라우팅에는 두 가지 방식이 있습니다.
 
 Go 프록시에서만 502 오류가 15건 발생했습니다. Go 프록시는 백엔드 목록을 시작할 때 인자로 받아서 고정해 두기 때문에, 사라진 `vllm-2`로 계속 요청을 보낸 것입니다. 부하 생성기는 오류가 난 대화를 거기서 중단하므로 전체 요청 수도 240건이 아니라 180건이 됐습니다.
 
+부하 생성기가 남긴 요청별 기록을 보면, 오류 15건은 모두 사라진 `vllm-2`(`v2`)로 보낸 요청이었습니다.
+
+```json
+{"conv":5,"turn":1,"backend":"v2","status":502,"err":"HTTP 502","ttft_ms":0,"total_ms":0,"prompt_tokens":0,"cached_tokens":0,"completion_tokens":0}
+{"conv":1,"turn":1,"backend":"v2","status":502,"err":"HTTP 502","ttft_ms":0,"total_ms":0,"prompt_tokens":0,"cached_tokens":0,"completion_tokens":0}
+```
+
 반면 llm-d는 오류가 없었습니다. `InferencePool`로 파드의 변화를 따라가기 때문에 `vllm-2`가 사라지자 남은 두 파드로 요청을 다시 나눴습니다.
 
 ### 다시 3개로
