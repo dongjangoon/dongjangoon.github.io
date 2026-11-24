@@ -318,4 +318,3 @@ GPU를 충분히 확보해서 서버당 동시 요청을 낮게 유지할 수 �
 - [vLLM PR #68620](https://github.com/vllm-project/vllm/pull/68620)
 - [vLLM 이슈 #61072](https://github.com/vllm-project/vllm/issues/61072)
 - [DFlash 논문](https://arxiv.org/abs/2602.06036)
-- [Massive Activations in Large Language Models](https://arxiv.org/abs/2402.17762)
