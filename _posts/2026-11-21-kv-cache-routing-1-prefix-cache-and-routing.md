@@ -63,6 +63,12 @@ GPU는 RTX 5070 Ti 16GB 한 장이고, 여기에 vLLM 복제본 3개를 띄워�
 
 복제본 3개는 GPU 한 장을 같이 쓰게 됩니다. docker compose에서는 별다른 설정 없이도 컨테이너 여러 개가 같은 GPU를 쓸 수 있었습니다. 그리고 몰랐는데 5070 Ti에도 타임슬라이싱이 적용 가능해서, 2편의 Kubernetes 실험에서는 디바이스 플러그인의 타임슬라이싱 설정으로 노드가 `nvidia.com/gpu=4`로 보이도록 두고 파드마다 GPU를 하나씩 요청하게 했습니다. 다만 어느 쪽이든 MIG와 달리(MIG는 데이터센터용 GPU에만 적용 가능합니다) 메모리는 알아서 나눠 주지 않기 때문에 `--gpu-memory-utilization 0.22`로 복제본마다 상한을 걸어 주었습니다. 3개를 다 띄우고 나면 VRAM을 16.3GB 중 12.1GB 사용하고, 복제본 하나가 KV 캐시로 쓸 수 있는 공간은 66,640토큰입니다. 이 옵션을 빼면 어떻게 되는지도 확인해보았는데, 기본값이 0.92라서 첫 번째 복제본부터 기동에 실패했습니다.
 
+```
+ValueError: Free memory on device cuda:0 (14.57/15.89 GiB) on startup is less than desired GPU memory utilization (0.92, 14.62 GiB). Decrease GPU memory utilization or reduce GPU memory used by other processes.
+```
+
+Windows 화면 출력 등으로 이미 1GiB 남짓을 쓰고 있어서 비어 있는 메모리는 14.57GiB였는데, 기본값으로는 14.62GiB를 요구해 0.05GiB가 모자랐습니다.
+
 ## 프리픽스 캐시를 눈으로 보기
 
 라우팅을 보기 전에 vLLM의 프리픽스 캐시가 어떻게 동작하는지부터 확인해보았습니다.
@@ -130,6 +136,15 @@ vLLM을 `--enable-prompt-tokens-details`로 띄우면 응답의 `usage`에 `cach
 |---|---|---|---|---|
 | 라운드로빈 | 0.71 | 749~785 | 57~59ms | 58~60ms |
 | Go 프록시 | 0.90 | 819~827 | 53~54ms | 54~55ms |
+
+부하 생성기가 실행마다 남기는 요약에서 두 정책의 첫 번째 실행을 일부 항목만 추려 보면 다음과 같습니다.
+
+```json
+{"label": "rr", "prompt_tokens": 198329, "cached_tokens": 141216, "actual_hit_ratio": 0.7120290023143363, "per_backend": {"v0": 80, "v1": 80, "v2": 80}}
+{"label": "prefix", "prompt_tokens": 198333, "cached_tokens": 178400, "actual_hit_ratio": 0.8994973100795127, "per_backend": {"v0": 120, "v1": 60, "v2": 60}}
+```
+
+`actual_hit_ratio`는 `cached_tokens`를 `prompt_tokens`로 나눈 값이고, `per_backend`는 복제본별로 보낸 요청 수입니다. 같은 양의 프롬프트에서 캐시로 재사용한 토큰이 약 14만에서 약 18만으로 늘었습니다.
 
 방향은 예측대로 적중률이 0.71에서 0.90으로 올랐고 처리량도 올랐습니다. 하지만 그 크기는 예상보다 작았는데, 두 가지가 눈에 띄었습니다.
 
